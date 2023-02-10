@@ -1,4 +1,5 @@
-﻿using System;
+﻿using C969_Performance_Assessment.Database;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +17,9 @@ namespace C969_Performance_Assessment
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            DBConnection.startConnection();
             Application.Run(new LoginForm());
+            DBConnection.closeConnection();
         }
     }
 }
