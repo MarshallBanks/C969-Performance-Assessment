@@ -14,6 +14,9 @@ namespace C969_Performance_Assessment
 {
     public partial class LoginForm : Form
     {
+        private string User { get; set; }
+        private string Pass { get; set; }
+
         public LoginForm()
         {
             InitializeComponent();
@@ -31,8 +34,19 @@ namespace C969_Performance_Assessment
 
         private void loginButton_Click(object sender, EventArgs e)
         {
-            
-        
+            User = userBox.Text;
+            Pass = passBox.Text;
+
+            string checkUsernamePassword = "SELECT userName, password FROM client_schedule.user WHERE userName=@User AND password=@Pass";
+
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = checkUsernamePassword;
+            cmd.Parameters.AddWithValue("@User", User);
+            cmd.Parameters.AddWithValue("@Pass", Pass);
+
+            //using (mysqldatareader reader = cmd.executereader()) ;
+
         }
     }
 }
