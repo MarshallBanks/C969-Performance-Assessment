@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Configuration;
 using MySqlConnector;
+using static C969_Performance_Assessment.Database.DBConnection;
 
 namespace C969_Performance_Assessment
 {
@@ -16,6 +17,9 @@ namespace C969_Performance_Assessment
     {
         private string User { get; set; }
         private string Pass { get; set; }
+
+        private string DBUser { get; set; }
+        private string DBPass { get; set; }
 
         public LoginForm()
         {
@@ -34,8 +38,15 @@ namespace C969_Performance_Assessment
 
         private void loginButton_Click(object sender, EventArgs e)
         {
+            if (passBox.Text == "" || userBox.Text == "")
+            {
+                MessageBox.Show("Form cannot be empty, please enter your username and password and try again.");
+                return;
+            }
+
             User = userBox.Text;
             Pass = passBox.Text;
+            
 
             string checkUsernamePassword = "SELECT userName, password FROM client_schedule.user WHERE userName=@User AND password=@Pass";
 
@@ -44,9 +55,29 @@ namespace C969_Performance_Assessment
             cmd.CommandText = checkUsernamePassword;
             cmd.Parameters.AddWithValue("@User", User);
             cmd.Parameters.AddWithValue("@Pass", Pass);
+            cmd.Connection = conn;
 
-            //using (mysqldatareader reader = cmd.executereader()) ;
+            using (MySqlDataReader reader = cmd.ExecuteReader())
+            {
+                if (reader.Read())
+                {
+                    DBUser = reader["userName"].ToString();
+                    DBPass = reader["password"].ToString();
+                }
+                
+            }
 
+            if (User == DBUser && Pass == DBPass)
+            {
+                MessageBox.Show("Login Successful!");
+            }
+            else
+            {
+                MessageBox.Show("Wrong username or password.");
+            }
         }
     }
 }
+
+
+
