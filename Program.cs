@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Globalization;
 
 namespace C969_Performance_Assessment
 {
@@ -17,8 +18,9 @@ namespace C969_Performance_Assessment
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            CultureInfo currentCulture = CultureInfo.CurrentUICulture;
             DBConnection.startConnection();
-            Application.Run(new LoginForm());
+            Application.Run(new LoginForm(currentCulture));
             DBConnection.closeConnection();
         }
     }

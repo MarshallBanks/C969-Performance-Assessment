@@ -10,24 +10,58 @@ using System.Windows.Forms;
 using System.Configuration;
 using MySqlConnector;
 using static C969_Performance_Assessment.Database.DBConnection;
+using System.Globalization;
+using System.Resources;
+using System.Diagnostics;
 
 namespace C969_Performance_Assessment
 {
     public partial class LoginForm : Form
     {
+        private readonly CultureInfo currentCulture;
+
         private string User { get; set; }
         private string Pass { get; set; }
 
         private string DBUser { get; set; }
         private string DBPass { get; set; }
 
+        private string loginCorrect;
+        private string loginError;
+        private string formEmpty;
+
         public LoginForm()
         {
             InitializeComponent();
         }
 
+        public LoginForm(CultureInfo currentCulture)
+        {
+            this.currentCulture = currentCulture;
+            InitializeComponent();
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
+            ResourceManager rm;
+
+            if (CultureInfo.CurrentUICulture.Name == "es-MX")
+            {
+                rm = new ResourceManager("C969_Performance_Assessment.Strings_es-MX", typeof(LoginForm).Assembly);
+            }
+            else
+            {
+                rm = new ResourceManager("C969_Performance_Assessment.Strings_en-US", typeof(LoginForm).Assembly);
+            }
+
+            cancelButton.Text = rm.GetString("CancelButton");
+            loginButton.Text = rm.GetString("LoginButton");
+            userLabel.Text = rm.GetString("UsernameLabel");
+            passLabel.Text = rm.GetString("PasswordLabel");
+            loginLabel.Text = rm.GetString("LoginMessage");
+            loginCorrect = rm.GetString("LoginCorrect");
+            loginError = rm.GetString("LoginError");
+            formEmpty = rm.GetString("FormEmpty");
 
         }
 
@@ -40,7 +74,7 @@ namespace C969_Performance_Assessment
         {
             if (passBox.Text == "" || userBox.Text == "")
             {
-                MessageBox.Show("Form cannot be empty, please enter your username and password and try again.");
+                MessageBox.Show(formEmpty);
                 return;
             }
 
@@ -69,11 +103,11 @@ namespace C969_Performance_Assessment
 
             if (User == DBUser && Pass == DBPass)
             {
-                MessageBox.Show("Login Successful!");
+                MessageBox.Show(loginCorrect);
             }
             else
             {
-                MessageBox.Show("Wrong username or password.");
+                MessageBox.Show(loginError);
             }
         }
     }
