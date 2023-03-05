@@ -18,6 +18,8 @@ namespace C969_Performance_Assessment
 {
     public partial class LoginForm : Form
     {
+        public static LoginForm Instance { get; } = new LoginForm();
+
         private readonly CultureInfo currentCulture;
 
         private string User { get; set; }
@@ -103,7 +105,14 @@ namespace C969_Performance_Assessment
 
             if (User == DBUser && Pass == DBPass)
             {
+                CurrentUser.instance.Name = User;
+
                 MessageBox.Show(loginCorrect);
+                                
+                MainForm newForm = new MainForm();
+                newForm.Show();
+                this.Hide();
+
             }
             else
             {

@@ -16,6 +16,7 @@ namespace C969_Performance_Assessment
         [STAThread]
         static void Main()
         {
+            CurrentUser.GetInstance();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             CultureInfo currentCulture = CultureInfo.CurrentUICulture;
