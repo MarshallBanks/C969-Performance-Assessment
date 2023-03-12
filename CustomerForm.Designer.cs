@@ -50,41 +50,45 @@ namespace C969_Performance_Assessment
             | System.Windows.Forms.AnchorStyles.Right)));
             this.customerDGV.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.customerDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.customerDGV.Location = new System.Drawing.Point(12, 12);
+            this.customerDGV.Location = new System.Drawing.Point(9, 11);
+            this.customerDGV.Margin = new System.Windows.Forms.Padding(2);
             this.customerDGV.Name = "customerDGV";
             this.customerDGV.ReadOnly = true;
             this.customerDGV.RowHeadersVisible = false;
             this.customerDGV.RowHeadersWidth = 51;
             this.customerDGV.RowTemplate.Height = 24;
             this.customerDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.customerDGV.Size = new System.Drawing.Size(1071, 367);
-            this.customerDGV.TabIndex = 0;
+            this.customerDGV.Size = new System.Drawing.Size(803, 298);
+            this.customerDGV.TabIndex = 3;
             // 
             // addCustButton
             // 
-            this.addCustButton.Location = new System.Drawing.Point(3, 3);
+            this.addCustButton.Location = new System.Drawing.Point(2, 2);
+            this.addCustButton.Margin = new System.Windows.Forms.Padding(2);
             this.addCustButton.Name = "addCustButton";
-            this.addCustButton.Size = new System.Drawing.Size(129, 34);
-            this.addCustButton.TabIndex = 1;
+            this.addCustButton.Size = new System.Drawing.Size(97, 28);
+            this.addCustButton.TabIndex = 0;
             this.addCustButton.Text = "Add";
             this.addCustButton.UseVisualStyleBackColor = true;
             this.addCustButton.Click += new System.EventHandler(this.addCustButton_Click);
             // 
             // updateCustButton
             // 
-            this.updateCustButton.Location = new System.Drawing.Point(138, 3);
+            this.updateCustButton.Location = new System.Drawing.Point(103, 2);
+            this.updateCustButton.Margin = new System.Windows.Forms.Padding(2);
             this.updateCustButton.Name = "updateCustButton";
-            this.updateCustButton.Size = new System.Drawing.Size(129, 34);
-            this.updateCustButton.TabIndex = 2;
+            this.updateCustButton.Size = new System.Drawing.Size(97, 28);
+            this.updateCustButton.TabIndex = 1;
             this.updateCustButton.Text = "Update";
             this.updateCustButton.UseVisualStyleBackColor = true;
             // 
             // delCustButton
             // 
-            this.delCustButton.Location = new System.Drawing.Point(273, 3);
+            this.delCustButton.Location = new System.Drawing.Point(204, 2);
+            this.delCustButton.Margin = new System.Windows.Forms.Padding(2);
             this.delCustButton.Name = "delCustButton";
-            this.delCustButton.Size = new System.Drawing.Size(131, 34);
-            this.delCustButton.TabIndex = 3;
+            this.delCustButton.Size = new System.Drawing.Size(98, 28);
+            this.delCustButton.TabIndex = 2;
             this.delCustButton.Text = "Delete";
             this.delCustButton.UseVisualStyleBackColor = true;
             // 
@@ -98,17 +102,17 @@ namespace C969_Performance_Assessment
             this.tableLayoutPanel1.Controls.Add(this.delCustButton, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.addCustButton, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.updateCustButton, 1, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(344, 396);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(258, 322);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(407, 40);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(305, 32);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
             // currentUserLabel
             // 
-            this.currentUserLabel.Margin = new System.Windows.Forms.Padding(0, 3, 0, 2);
             this.currentUserLabel.Name = "currentUserLabel";
             this.currentUserLabel.Size = new System.Drawing.Size(23, 23);
             // 
@@ -117,31 +121,34 @@ namespace C969_Performance_Assessment
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 447);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 362);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1095, 26);
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 10, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(821, 22);
             this.statusStrip1.TabIndex = 7;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(184, 20);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(148, 17);
             this.toolStripStatusLabel1.Text = "Logged In As: Current User";
             // 
             // CustomerForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1095, 473);
+            this.ClientSize = new System.Drawing.Size(821, 384);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.customerDGV);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MinimumSize = new System.Drawing.Size(818, 411);
+            this.Margin = new System.Windows.Forms.Padding(2);
+            this.MinimumSize = new System.Drawing.Size(618, 341);
             this.Name = "CustomerForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Customers";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CustomerForm_FormClosed);
             this.Load += new System.EventHandler(this.CustomerForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.customerDGV)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);

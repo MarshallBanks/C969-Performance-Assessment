@@ -119,6 +119,11 @@ namespace C969_Performance_Assessment
                 MessageBox.Show(loginError);
             }
         }
+
+        private void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
 
