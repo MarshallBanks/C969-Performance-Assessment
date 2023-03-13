@@ -95,7 +95,6 @@ namespace C969_Performance_Assessment
                     cmd.Parameters.AddWithValue("@PostalCode", postalCode);
                     cmd.Parameters.AddWithValue("@CreatedBy", CurrentUser.instance.Name);
                     cmd.Parameters.AddWithValue("@LastUpdateBy", CurrentUser.instance.Name);
-                    MessageBox.Show(CurrentUser.instance.Name);
                     cmd.ExecuteNonQuery();
                 }
 

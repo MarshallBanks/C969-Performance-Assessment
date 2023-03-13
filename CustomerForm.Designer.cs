@@ -58,7 +58,7 @@ namespace C969_Performance_Assessment
             this.customerDGV.RowHeadersWidth = 51;
             this.customerDGV.RowTemplate.Height = 24;
             this.customerDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.customerDGV.Size = new System.Drawing.Size(803, 298);
+            this.customerDGV.Size = new System.Drawing.Size(964, 336);
             this.customerDGV.TabIndex = 3;
             // 
             // addCustButton
@@ -102,7 +102,7 @@ namespace C969_Performance_Assessment
             this.tableLayoutPanel1.Controls.Add(this.delCustButton, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.addCustButton, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.updateCustButton, 1, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(258, 322);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(339, 387);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
@@ -121,10 +121,10 @@ namespace C969_Performance_Assessment
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 362);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 447);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 10, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(821, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(982, 22);
             this.statusStrip1.TabIndex = 7;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -138,7 +138,7 @@ namespace C969_Performance_Assessment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(821, 384);
+            this.ClientSize = new System.Drawing.Size(982, 469);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.customerDGV);

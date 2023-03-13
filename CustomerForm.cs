@@ -27,15 +27,20 @@ namespace C969_Performance_Assessment
 
         public void loadCustomers()
         {
-            string getCustomerData = "SELECT customerId AS 'Customer ID', " +
-                                        "customerName AS 'Customer Name', " +
-                                        "addressID AS 'Address ID', " +
-                                        "active AS Active, " +
-                                        "createDate AS 'Created Date', " +
-                                        "createdBy AS 'Created By', " +
-                                        "lastUpdate AS 'Last Updated', " +
-                                        "lastUpdateBy AS 'Last Updated By' " +
-                                        "FROM customer;";
+            string getCustomerData = "SELECT cust.customerId AS 'Customer ID', " +
+                                        "cust.customerName AS 'Customer Name', " +
+                                        "addr.address AS 'Address', " +
+                                        "city.city AS 'City', " +
+                                        "addr.postalCode AS 'Postal Code', " +
+                                        "addr.phone AS 'Phone', " +
+                                        "cust.active AS 'Active', " +
+                                        "cust.createDate AS 'Created Date', " +
+                                        "cust.createdBy AS 'Created By', " +
+                                        "cust.lastUpdate AS 'Last Updated', " +
+                                        "cust.lastUpdateBy AS 'Last Updated By' " +
+                                        "FROM customer cust " +
+                                        "JOIN address addr on cust.addressId = addr.addressId " +
+                                        "JOIN city on city.cityId = addr.cityId;";
 
             MySqlCommand cmd = new MySqlCommand(getCustomerData, conn);
             MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
