@@ -40,7 +40,8 @@ namespace C969_Performance_Assessment
                                         "cust.lastUpdateBy AS 'Last Updated By' " +
                                         "FROM customer cust " +
                                         "JOIN address addr on cust.addressId = addr.addressId " +
-                                        "JOIN city on city.cityId = addr.cityId;";
+                                        "JOIN city on city.cityId = addr.cityId " +
+                                        "ORDER BY cust.customerId;";
 
             MySqlCommand cmd = new MySqlCommand(getCustomerData, conn);
             MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
@@ -48,17 +49,77 @@ namespace C969_Performance_Assessment
             adapter.Fill(custDataTable);
 
             customerDGV.DataSource = custDataTable;
+            customerDGV.ClearSelection();
         }
 
         private void addCustButton_Click(object sender, EventArgs e)
         {
             AddCustForm addCustForm = new AddCustForm(this);
-            addCustForm.Show();
+            addCustForm.ShowDialog();
         }
 
         private void CustomerForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             MainForm.Instance.Show();
+        }
+
+        private void updateCustButton_Click(object sender, EventArgs e)
+        {
+            if(!customerDGV.CurrentRow.Selected)
+            {
+                MessageBox.Show("Please select the customer you wish to update", "Nothing Selected", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            else
+            {
+                UpdateCustForm updateCustForm = new UpdateCustForm(this);
+                updateCustForm.ShowDialog();
+            }
+        }
+
+        private void delCustButton_Click(object sender, EventArgs e)
+        {
+            if (!customerDGV.CurrentRow.Selected)
+            {
+                MessageBox.Show("Please select the customer you wish to delete", "Nothing Selected", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            else
+            {
+                DataGridViewRow selectedRow = customerDGV.SelectedRows[0];
+
+                int customerId = (int)selectedRow.Cells["Customer ID"].Value;
+                string customerName = (string)selectedRow.Cells["Customer Name"].Value;
+
+
+                DialogResult answer = MessageBox.Show($"Are you sure you wish to delete \"{customerName}\" with Customer ID:{customerId} from the list?", "Warning!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (answer != DialogResult.Yes)
+                {
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show("Delete customer code reached.");
+
+                    int addressId;
+                    string getAddressId = "SELECT addressID FROM customer WHERE customerId = @CustomerId;";
+                    using (MySqlCommand cmd = new MySqlCommand(getAddressId, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@CustomerId", customerId);
+                        addressId = (int)cmd.ExecuteScalar();
+                    }
+
+                    string deleteCustomer = "DELETE FROM customer WHERE customerId = @CustomerId; DELETE FROM address WHERE addressId = @AddressId;";
+                    using (MySqlCommand cmd = new MySqlCommand(deleteCustomer, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@CustomerId", customerId);
+                        cmd.Parameters.AddWithValue("@AddressId", addressId);
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    this.loadCustomers();
+                }
+
+
+            }
         }
     }
 }

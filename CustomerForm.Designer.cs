@@ -52,6 +52,7 @@ namespace C969_Performance_Assessment
             this.customerDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.customerDGV.Location = new System.Drawing.Point(9, 11);
             this.customerDGV.Margin = new System.Windows.Forms.Padding(2);
+            this.customerDGV.MultiSelect = false;
             this.customerDGV.Name = "customerDGV";
             this.customerDGV.ReadOnly = true;
             this.customerDGV.RowHeadersVisible = false;
@@ -81,6 +82,7 @@ namespace C969_Performance_Assessment
             this.updateCustButton.TabIndex = 1;
             this.updateCustButton.Text = "Update";
             this.updateCustButton.UseVisualStyleBackColor = true;
+            this.updateCustButton.Click += new System.EventHandler(this.updateCustButton_Click);
             // 
             // delCustButton
             // 
@@ -91,6 +93,7 @@ namespace C969_Performance_Assessment
             this.delCustButton.TabIndex = 2;
             this.delCustButton.Text = "Delete";
             this.delCustButton.UseVisualStyleBackColor = true;
+            this.delCustButton.Click += new System.EventHandler(this.delCustButton_Click);
             // 
             // tableLayoutPanel1
             // 
