@@ -17,16 +17,47 @@ namespace C969_Performance_Assessment
     {
         private readonly CustomerForm customerForm;
 
-        public UpdateCustForm(CustomerForm customerForm)
+        private readonly int customerId;
+
+        private string originalFullName;
+        private string originalAddress;
+        private string originalPostalCode;
+        private string originalCity;
+        private string originalPhoneNumber;
+        private bool originalIsActive;
+
+        
+
+        public UpdateCustForm(CustomerForm customerForm, DataGridViewRow selectedRow)
         {
             InitializeComponent();
             this.customerForm = customerForm;
 
+            // Save the ID of the selected customer to use in UPDATE query
+            customerId = (int)selectedRow.Cells["Customer ID"].Value;
+
+            // Save the original values for each field
+            originalFullName = (string)selectedRow.Cells["Customer Name"].Value;
+            originalAddress = (string)selectedRow.Cells["Address"].Value;
+            originalPostalCode = (string)selectedRow.Cells["Postal Code"].Value;
+            originalPhoneNumber = (string)selectedRow.Cells["Phone"].Value;
+            originalCity = (string)selectedRow.Cells["City"].Value;
+            originalIsActive = (bool)selectedRow.Cells["Active"].Value;
+
+
+            // Set the values of the textboxes and radiobuttons
+            fullNameBox.Text = originalFullName;
+            addressBox.Text = originalAddress;
+            postalCodeBox.Text = originalPostalCode;
+            phoneNumberBox.Text = originalPhoneNumber;
+            cityComboBox.SelectedItem = originalCity;
+            activeButton.Checked = originalIsActive;
+            inactiveButton.Checked = !originalIsActive;
         }
 
         private void UpdateCustForm_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -73,50 +104,118 @@ namespace C969_Performance_Assessment
 
             else
             {
-                string cityName = cityComboBox.SelectedItem.ToString();
-                int cityId;
-                string getCityIDQuery = "SELECT cityID FROM city WHERE city = @CityName;";
-                using (MySqlCommand cmd = new MySqlCommand(getCityIDQuery, conn))
-                {
-                    cmd.Parameters.AddWithValue("@CityName", cityName);
-                    cityId = (int)cmd.ExecuteScalar();
-                }
 
-
+                string updateQuery = "UPDATE customer c INNER JOIN address a ON c.addressId = a.addressId SET ";
+                string fullName = fullNameBox.Text;
+                string address = addressBox.Text;
                 string postalCode = postalCodeBox.Text;
                 string phone = phoneNumberBox.Text;
-                string address = addressBox.Text;
-                string addressInsert = "INSERT INTO address (address, address2, cityId, postalCode, phone, createDate, createdBy, lastUpdateBy) VALUES (@Address, '', @CityId, @PostalCode, @Phone, NOW(), @CreatedBy, @LastUpdateBy);";
-                using (MySqlCommand cmd = new MySqlCommand(addressInsert, conn))
+                string city = cityComboBox.Text;
+                int cityId = 0;
+                bool isActive = activeButton.Checked;
+
+                if (fullName != originalFullName)
+                {
+                    updateQuery += "c.customerName = @FullName, ";
+                }
+
+                if (address != originalAddress)
+                {
+                    updateQuery += "a.address = @Address, ";
+                }
+
+                if (postalCode != originalPostalCode)
+                {
+                    updateQuery += "a.postalCode = @PostalCode, ";
+                }
+
+                if (phone != originalPhoneNumber)
+                {
+                    updateQuery += "a.phone = @Phone, ";
+                }
+
+                if (city != originalCity)
+                {
+                    updateQuery += "a.cityId = @CityId, ";
+
+                    // Get cityId from the database
+                    string getCityIDQuery = "SELECT cityID FROM city WHERE city = @City;";
+                    using (MySqlCommand cmd = new MySqlCommand(getCityIDQuery, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@City", city);
+                        cityId = (int)cmd.ExecuteScalar();
+                    }
+                }
+
+                if (isActive != originalIsActive)
+                {
+                    updateQuery += "c.active = @Active, ";
+                }
+                
+                // Add lastUpdateBy and WHERE clause to the query
+                updateQuery += "c.lastUpdateBy = @LastUpdateBy WHERE c.customerId = @CustomerId;";
+
+                using (MySqlCommand cmd = new MySqlCommand(updateQuery, conn))
                 {
                     cmd.Parameters.AddWithValue("@Address", address);
-                    cmd.Parameters.AddWithValue("@CityId", cityId);
                     cmd.Parameters.AddWithValue("@Phone", phone);
+                    cmd.Parameters.AddWithValue("@FullName", fullName);
                     cmd.Parameters.AddWithValue("@PostalCode", postalCode);
-                    cmd.Parameters.AddWithValue("@CreatedBy", CurrentUser.instance.Name);
+                    cmd.Parameters.AddWithValue("@CityId", cityId);
                     cmd.Parameters.AddWithValue("@LastUpdateBy", CurrentUser.instance.Name);
+                    cmd.Parameters.AddWithValue("@Active", Convert.ToInt32(isActive));
+                    cmd.Parameters.AddWithValue("@CustomerId", customerId);
                     cmd.ExecuteNonQuery();
                 }
 
-                int addressId;
-                using (MySqlCommand cmd = new MySqlCommand("SELECT LAST_INSERT_ID();", conn))
-                {
-                    addressId = Convert.ToInt32(cmd.ExecuteScalar());
-                }
 
-                string name = fullNameBox.Text;
-                bool isActive = activeButton.Checked;
-                string customerInsert = "INSERT INTO customer (customerName, addressId, active, createDate, createdBy, lastUpdateBy) VALUES (@Name, @AddressID, @isActive, @CreatedDate, @CreatedBy, @LastUpdateBy );";
-                using (MySqlCommand cmd = new MySqlCommand(customerInsert, conn))
-                {
-                    cmd.Parameters.AddWithValue("@Name", name);
-                    cmd.Parameters.AddWithValue("@AddressID", addressId);
-                    cmd.Parameters.AddWithValue("@isActive", isActive ? 1 : 0);
-                    cmd.Parameters.AddWithValue("@CreatedBy", CurrentUser.instance.Name);
-                    cmd.Parameters.AddWithValue("@LastUpdateBy", CurrentUser.instance.Name);
-                    cmd.Parameters.AddWithValue("@CreatedDate", DateTime.Now.Date);
-                    cmd.ExecuteNonQuery();
-                }
+                //string addressInsert = "INSERT INTO address (address, address2, cityId, postalCode, phone, createDate, createdBy, lastUpdateBy) VALUES (@Address, '', @CityId, @PostalCode, @Phone, NOW(), @CreatedBy, @LastUpdateBy);";
+                //using (MySqlCommand cmd = new MySqlCommand(addressInsert, conn))
+                //{
+                //    cmd.Parameters.AddWithValue("@Address", address);
+                //    cmd.Parameters.AddWithValue("@CityId", cityId);
+                //    cmd.Parameters.AddWithValue("@Phone", phone);
+                //    cmd.Parameters.AddWithValue("@PostalCode", postalCode);
+                //    cmd.Parameters.AddWithValue("@CreatedBy", CurrentUser.instance.Name);
+                //    cmd.Parameters.AddWithValue("@LastUpdateBy", CurrentUser.instance.Name);
+                //    cmd.ExecuteNonQuery();
+                //}
+
+
+                //string postalCode = postalCodeBox.Text;
+                //string phone = phoneNumberBox.Text;
+                //string address = addressBox.Text;
+                //string addressInsert = "INSERT INTO address (address, address2, cityId, postalCode, phone, createDate, createdBy, lastUpdateBy) VALUES (@Address, '', @CityId, @PostalCode, @Phone, NOW(), @CreatedBy, @LastUpdateBy);";
+                //using (MySqlCommand cmd = new MySqlCommand(addressInsert, conn))
+                //{
+                //    cmd.Parameters.AddWithValue("@Address", address);
+                //    cmd.Parameters.AddWithValue("@CityId", cityId);
+                //    cmd.Parameters.AddWithValue("@Phone", phone);
+                //    cmd.Parameters.AddWithValue("@PostalCode", postalCode);
+                //    cmd.Parameters.AddWithValue("@CreatedBy", CurrentUser.instance.Name);
+                //    cmd.Parameters.AddWithValue("@LastUpdateBy", CurrentUser.instance.Name);
+                //    cmd.ExecuteNonQuery();
+                //}
+
+                //int addressId;
+                //using (MySqlCommand cmd = new MySqlCommand("SELECT LAST_INSERT_ID();", conn))
+                //{
+                //    addressId = Convert.ToInt32(cmd.ExecuteScalar());
+                //}
+
+                //string name = fullNameBox.Text;
+                //bool isActive = activeButton.Checked;
+                //string customerInsert = "INSERT INTO customer (customerName, addressId, active, createDate, createdBy, lastUpdateBy) VALUES (@Name, @AddressID, @isActive, @CreatedDate, @CreatedBy, @LastUpdateBy );";
+                //using (MySqlCommand cmd = new MySqlCommand(customerInsert, conn))
+                //{
+                //    cmd.Parameters.AddWithValue("@Name", name);
+                //    cmd.Parameters.AddWithValue("@AddressID", addressId);
+                //    cmd.Parameters.AddWithValue("@isActive", isActive ? 1 : 0);
+                //    cmd.Parameters.AddWithValue("@CreatedBy", CurrentUser.instance.Name);
+                //    cmd.Parameters.AddWithValue("@LastUpdateBy", CurrentUser.instance.Name);
+                //    cmd.Parameters.AddWithValue("@CreatedDate", DateTime.Now.Date);
+                //    cmd.ExecuteNonQuery();
+                //}
 
                 customerForm.loadCustomers();
 
