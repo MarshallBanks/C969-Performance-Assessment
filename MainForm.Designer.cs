@@ -38,9 +38,10 @@ namespace C969_Performance_Assessment
             // 
             // customersButton
             // 
-            this.customersButton.Location = new System.Drawing.Point(195, 202);
+            this.customersButton.Location = new System.Drawing.Point(146, 164);
+            this.customersButton.Margin = new System.Windows.Forms.Padding(2);
             this.customersButton.Name = "customersButton";
-            this.customersButton.Size = new System.Drawing.Size(140, 31);
+            this.customersButton.Size = new System.Drawing.Size(105, 25);
             this.customersButton.TabIndex = 0;
             this.customersButton.Text = "Customers";
             this.customersButton.UseVisualStyleBackColor = true;
@@ -48,9 +49,10 @@ namespace C969_Performance_Assessment
             // 
             // apptsButton
             // 
-            this.apptsButton.Location = new System.Drawing.Point(432, 202);
+            this.apptsButton.Location = new System.Drawing.Point(324, 164);
+            this.apptsButton.Margin = new System.Windows.Forms.Padding(2);
             this.apptsButton.Name = "apptsButton";
-            this.apptsButton.Size = new System.Drawing.Size(173, 31);
+            this.apptsButton.Size = new System.Drawing.Size(130, 25);
             this.apptsButton.TabIndex = 1;
             this.apptsButton.Text = "Appointments";
             this.apptsButton.UseVisualStyleBackColor = true;
@@ -61,28 +63,31 @@ namespace C969_Performance_Assessment
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 424);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 344);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(800, 26);
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 10, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(600, 22);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(184, 20);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(148, 17);
             this.toolStripStatusLabel1.Text = "Logged In As: Current User";
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(600, 366);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.apptsButton);
             this.Controls.Add(this.customersButton);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Home";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();

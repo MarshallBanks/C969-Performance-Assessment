@@ -27,7 +27,9 @@ namespace C969_Performance_Assessment
 
         private void apptsButton_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            SchedulingForm schedulingForm = new SchedulingForm();
+            schedulingForm.Show();
         }
 
         private void customersButton_Click(object sender, EventArgs e)
@@ -36,5 +38,6 @@ namespace C969_Performance_Assessment
             CustomerForm customerForm = new CustomerForm();
             customerForm.Show();
         }
+
     }
 }

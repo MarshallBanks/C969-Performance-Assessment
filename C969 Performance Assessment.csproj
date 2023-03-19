@@ -85,6 +85,12 @@
     <Compile Include="AddCustForm.Designer.cs">
       <DependentUpon>AddCustForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddApptForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddApptForm.Designer.cs">
+      <DependentUpon>AddApptForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SchedulingForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -121,6 +127,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings_es-MX.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AddApptForm.resx">
+      <DependentUpon>AddApptForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CustomerForm.resx">
       <DependentUpon>CustomerForm.cs</DependentUpon>
     </EmbeddedResource>

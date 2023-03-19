@@ -97,8 +97,6 @@ namespace C969_Performance_Assessment
                 }
                 else
                 {
-                    MessageBox.Show("Delete customer code reached.");
-
                     int addressId;
                     string getAddressId = "SELECT addressID FROM customer WHERE customerId = @CustomerId;";
                     using (MySqlCommand cmd = new MySqlCommand(getAddressId, conn))
@@ -106,7 +104,7 @@ namespace C969_Performance_Assessment
                         cmd.Parameters.AddWithValue("@CustomerId", customerId);
                         addressId = (int)cmd.ExecuteScalar();
                     }
-
+                    
                     string deleteCustomer = "DELETE FROM customer WHERE customerId = @CustomerId; DELETE FROM address WHERE addressId = @AddressId;";
                     using (MySqlCommand cmd = new MySqlCommand(deleteCustomer, conn))
                     {
