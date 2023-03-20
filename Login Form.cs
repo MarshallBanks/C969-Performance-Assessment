@@ -109,8 +109,8 @@ namespace C969_Performance_Assessment
 
                 MessageBox.Show(loginCorrect);
                                 
-                MainForm newForm = new MainForm();
-                newForm.Show();
+                SchedulingForm schedulingForm = new SchedulingForm();
+                schedulingForm.Show();
                 this.Hide();
 
             }

@@ -22,16 +22,16 @@ namespace C969_Performance_Assessment
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            //    // Check for empty fields
-            //    if (string.IsNullOrWhiteSpace(fullNameBox.Text) ||
-            //        string.IsNullOrWhiteSpace(addressBox.Text) ||
-            //        string.IsNullOrWhiteSpace(postalCodeBox.Text) ||
-            //        string.IsNullOrWhiteSpace(phoneNumberBox.Text) ||
-            //        string.IsNullOrWhiteSpace(cityComboBox.Text))
-            //    {
-            //        MessageBox.Show("Check required fields. Fields marked with an asterisk (*) are required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //        return;
-            //    }
+            // Check for empty fields
+            if (string.IsNullOrWhiteSpace(titleTextBox.Text) ||
+                string.IsNullOrWhiteSpace(typeComboBox.Text) ||
+                string.IsNullOrWhiteSpace(customerComboBox.Text) ||
+                string.IsNullOrWhiteSpace(typeComboBox.Text) ||
+                string.IsNullOrWhiteSpace(locationTextBox.Text))
+            {
+                MessageBox.Show("Check required fields. Fields marked with an asterisk (*) are required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             //    // Check the phone number for at least 10 digits
             //    else if (phoneNumberBox.Text.Where(char.IsDigit).Count() != 10)
             //    {
@@ -51,11 +51,11 @@ namespace C969_Performance_Assessment
             //        MessageBox.Show("Invalid postal code. Please enter a 5-digit postal code.");
             //    }
             //    // Check the address for invalid characters
-            //    else if (!(new Regex("^^[a-zA-Z0-9 #&.,'-]*$")).IsMatch(addressBox.Text))
-            //    {
-            //        // Display an error message to the user
-            //        MessageBox.Show("Invalid address. Please enter a valid address with only letters, numbers, and basic punctuation marks.");
-            //    }
+            else if (!(new Regex("^^[a-zA-Z0-9 #&.,'-]*$")).IsMatch(locationTextBox.Text))
+            {
+                // Display an error message to the user
+                MessageBox.Show("Invalid location. Please enter a valid location with only letters, numbers, and basic punctuation marks.");
+            }
         }
 
         private void AddApptForm_Load(object sender, EventArgs e)
@@ -71,20 +71,27 @@ namespace C969_Performance_Assessment
 
             Dictionary<int, string> customers = new Dictionary<int, string>();
 
-            MySqlDataReader reader = cmd.ExecuteReader();
-
-            while (reader.Read())
+            using (MySqlDataReader reader = cmd.ExecuteReader())
             {
-                int customerID = reader.GetInt32("customerID");
-                string customerName = reader.GetString("customerName");
-                customers.Add(customerID, customerName);
+                while (reader.Read())
+                {
+                    int customerID = reader.GetInt32("customerID");
+                    string customerName = reader.GetString("customerName");
+                    customers.Add(customerID, customerName);
+                }
+
+                customerComboBox.DisplayMember = "Value";
+                customerComboBox.ValueMember = "Key";
+                customerComboBox.DataSource = new BindingSource(customers, null);
             }
 
-            customerComboBox.DisplayMember = "Value";
-            customerComboBox.ValueMember = "Key";
-            customerComboBox.DataSource = new BindingSource(customers, null);
         }
 
-
+        private void addCustButton_Click(object sender, EventArgs e)
+        {
+            AddCustForm addCustForm = new AddCustForm();
+            addCustForm.ShowDialog();
+            loadCustomerNames();
+        }
     }
 }

@@ -54,13 +54,14 @@ namespace C969_Performance_Assessment
 
         private void addCustButton_Click(object sender, EventArgs e)
         {
-            AddCustForm addCustForm = new AddCustForm(this);
+            AddCustForm addCustForm = new AddCustForm();
             addCustForm.ShowDialog();
+            loadCustomers();
         }
 
         private void CustomerForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            MainForm.Instance.Show();
+            SchedulingForm.Instance.Show();
         }
 
         private void updateCustButton_Click(object sender, EventArgs e)

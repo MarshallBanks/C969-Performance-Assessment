@@ -15,13 +15,10 @@ namespace C969_Performance_Assessment
 {
     public partial class AddCustForm : Form
     {
-        private readonly CustomerForm customerForm;
 
-        public AddCustForm(CustomerForm customerForm)
+        public AddCustForm()
         {
             InitializeComponent();
-            this.customerForm = customerForm;
-
         }
 
         private void AddCustForm_Load(object sender, EventArgs e)
@@ -117,8 +114,6 @@ namespace C969_Performance_Assessment
                     cmd.Parameters.AddWithValue("@CreatedDate", DateTime.Now.Date);
                     cmd.ExecuteNonQuery();
                 }
-
-                customerForm.loadCustomers();
 
                 this.Close();
             }

@@ -14,14 +14,17 @@ namespace C969_Performance_Assessment
 {
     public partial class SchedulingForm : Form
     {
+        public static SchedulingForm Instance { get; } = new SchedulingForm();
+
         public SchedulingForm()
         {
             InitializeComponent();
+            toolStripStatusLabel1.Text = "Logged In As: " + CurrentUser.instance.Name;
         }
 
         private void SchedulingForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            MainForm.Instance.Show();
+            LoginForm.Instance.Show();
         }
 
         public void loadAppointments()
@@ -62,6 +65,14 @@ namespace C969_Performance_Assessment
             AddApptForm addApptForm = new AddApptForm();
             addApptForm.ShowDialog();
         }
+
+        private void customerEditorBtn_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            CustomerForm customerForm = new CustomerForm();
+            customerForm.Show();
+        }
+
 
     }
 }
