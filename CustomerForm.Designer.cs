@@ -33,12 +33,11 @@ namespace C969_Performance_Assessment
             this.addCustButton = new System.Windows.Forms.Button();
             this.updateCustButton = new System.Windows.Forms.Button();
             this.delCustButton = new System.Windows.Forms.Button();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.currentUserLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.BackBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.customerDGV)).BeginInit();
-            this.tableLayoutPanel1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,7 +49,7 @@ namespace C969_Performance_Assessment
             | System.Windows.Forms.AnchorStyles.Right)));
             this.customerDGV.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.customerDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.customerDGV.Location = new System.Drawing.Point(9, 11);
+            this.customerDGV.Location = new System.Drawing.Point(133, 21);
             this.customerDGV.Margin = new System.Windows.Forms.Padding(2);
             this.customerDGV.MultiSelect = false;
             this.customerDGV.Name = "customerDGV";
@@ -59,12 +58,12 @@ namespace C969_Performance_Assessment
             this.customerDGV.RowHeadersWidth = 51;
             this.customerDGV.RowTemplate.Height = 24;
             this.customerDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.customerDGV.Size = new System.Drawing.Size(964, 336);
+            this.customerDGV.Size = new System.Drawing.Size(997, 426);
             this.customerDGV.TabIndex = 3;
             // 
             // addCustButton
             // 
-            this.addCustButton.Location = new System.Drawing.Point(2, 2);
+            this.addCustButton.Location = new System.Drawing.Point(20, 21);
             this.addCustButton.Margin = new System.Windows.Forms.Padding(2);
             this.addCustButton.Name = "addCustButton";
             this.addCustButton.Size = new System.Drawing.Size(97, 28);
@@ -75,7 +74,7 @@ namespace C969_Performance_Assessment
             // 
             // updateCustButton
             // 
-            this.updateCustButton.Location = new System.Drawing.Point(103, 2);
+            this.updateCustButton.Location = new System.Drawing.Point(20, 53);
             this.updateCustButton.Margin = new System.Windows.Forms.Padding(2);
             this.updateCustButton.Name = "updateCustButton";
             this.updateCustButton.Size = new System.Drawing.Size(97, 28);
@@ -86,7 +85,7 @@ namespace C969_Performance_Assessment
             // 
             // delCustButton
             // 
-            this.delCustButton.Location = new System.Drawing.Point(204, 2);
+            this.delCustButton.Location = new System.Drawing.Point(20, 85);
             this.delCustButton.Margin = new System.Windows.Forms.Padding(2);
             this.delCustButton.Name = "delCustButton";
             this.delCustButton.Size = new System.Drawing.Size(98, 28);
@@ -94,25 +93,6 @@ namespace C969_Performance_Assessment
             this.delCustButton.Text = "Delete";
             this.delCustButton.UseVisualStyleBackColor = true;
             this.delCustButton.Click += new System.EventHandler(this.delCustButton_Click);
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.Controls.Add(this.delCustButton, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.addCustButton, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.updateCustButton, 1, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(339, 387);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(305, 32);
-            this.tableLayoutPanel1.TabIndex = 4;
             // 
             // currentUserLabel
             // 
@@ -127,7 +107,7 @@ namespace C969_Performance_Assessment
             this.statusStrip1.Location = new System.Drawing.Point(0, 447);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 10, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(982, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1141, 22);
             this.statusStrip1.TabIndex = 7;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -137,24 +117,36 @@ namespace C969_Performance_Assessment
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(148, 17);
             this.toolStripStatusLabel1.Text = "Logged In As: Current User";
             // 
+            // BackBtn
+            // 
+            this.BackBtn.Location = new System.Drawing.Point(19, 118);
+            this.BackBtn.Name = "BackBtn";
+            this.BackBtn.Size = new System.Drawing.Size(98, 28);
+            this.BackBtn.TabIndex = 8;
+            this.BackBtn.Text = "<- Back";
+            this.BackBtn.UseVisualStyleBackColor = true;
+            this.BackBtn.Click += new System.EventHandler(this.BackBtn_Click);
+            // 
             // CustomerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(982, 469);
+            this.ClientSize = new System.Drawing.Size(1141, 469);
+            this.Controls.Add(this.BackBtn);
+            this.Controls.Add(this.delCustButton);
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.addCustButton);
+            this.Controls.Add(this.updateCustButton);
             this.Controls.Add(this.customerDGV);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MinimumSize = new System.Drawing.Size(618, 341);
             this.Name = "CustomerForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Customers";
+            this.Text = "Customer Editor";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CustomerForm_FormClosed);
             this.Load += new System.EventHandler(this.CustomerForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.customerDGV)).EndInit();
-            this.tableLayoutPanel1.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -168,9 +160,9 @@ namespace C969_Performance_Assessment
         private System.Windows.Forms.Button addCustButton;
         private System.Windows.Forms.Button updateCustButton;
         private System.Windows.Forms.Button delCustButton;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.ToolStripStatusLabel currentUserLabel;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.Button BackBtn;
     }
 }

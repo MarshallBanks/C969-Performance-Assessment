@@ -45,7 +45,7 @@ namespace C969_Performance_Assessment
             // monthlyButton
             // 
             this.monthlyButton.AutoSize = true;
-            this.monthlyButton.Location = new System.Drawing.Point(18, 106);
+            this.monthlyButton.Location = new System.Drawing.Point(18, 122);
             this.monthlyButton.Name = "monthlyButton";
             this.monthlyButton.Size = new System.Drawing.Size(88, 17);
             this.monthlyButton.TabIndex = 1;
@@ -56,7 +56,7 @@ namespace C969_Performance_Assessment
             // weeklyButton
             // 
             this.weeklyButton.AutoSize = true;
-            this.weeklyButton.Location = new System.Drawing.Point(19, 129);
+            this.weeklyButton.Location = new System.Drawing.Point(18, 145);
             this.weeklyButton.Name = "weeklyButton";
             this.weeklyButton.Size = new System.Drawing.Size(87, 17);
             this.weeklyButton.TabIndex = 2;
@@ -66,9 +66,9 @@ namespace C969_Performance_Assessment
             // 
             // addButton
             // 
-            this.addButton.Location = new System.Drawing.Point(31, 11);
+            this.addButton.Location = new System.Drawing.Point(18, 12);
             this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(75, 23);
+            this.addButton.Size = new System.Drawing.Size(97, 28);
             this.addButton.TabIndex = 3;
             this.addButton.Text = "Add";
             this.addButton.UseVisualStyleBackColor = true;
@@ -76,21 +76,22 @@ namespace C969_Performance_Assessment
             // 
             // updateButton
             // 
-            this.updateButton.Location = new System.Drawing.Point(31, 40);
+            this.updateButton.Location = new System.Drawing.Point(18, 46);
             this.updateButton.Name = "updateButton";
-            this.updateButton.Size = new System.Drawing.Size(75, 23);
+            this.updateButton.Size = new System.Drawing.Size(97, 28);
             this.updateButton.TabIndex = 4;
             this.updateButton.Text = "Update";
             this.updateButton.UseVisualStyleBackColor = true;
             // 
             // deleteButton
             // 
-            this.deleteButton.Location = new System.Drawing.Point(31, 68);
+            this.deleteButton.Location = new System.Drawing.Point(18, 80);
             this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(75, 23);
+            this.deleteButton.Size = new System.Drawing.Size(97, 28);
             this.deleteButton.TabIndex = 5;
             this.deleteButton.Text = "Delete";
             this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
             // 
             // appointmentDGV
             // 
@@ -100,7 +101,7 @@ namespace C969_Performance_Assessment
             | System.Windows.Forms.AnchorStyles.Right)));
             this.appointmentDGV.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.appointmentDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.appointmentDGV.Location = new System.Drawing.Point(145, 9);
+            this.appointmentDGV.Location = new System.Drawing.Point(132, 12);
             this.appointmentDGV.Margin = new System.Windows.Forms.Padding(2);
             this.appointmentDGV.MultiSelect = false;
             this.appointmentDGV.Name = "appointmentDGV";
@@ -109,12 +110,12 @@ namespace C969_Performance_Assessment
             this.appointmentDGV.RowHeadersWidth = 51;
             this.appointmentDGV.RowTemplate.Height = 24;
             this.appointmentDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.appointmentDGV.Size = new System.Drawing.Size(691, 432);
+            this.appointmentDGV.Size = new System.Drawing.Size(997, 426);
             this.appointmentDGV.TabIndex = 6;
             // 
             // customerEditorBtn
             // 
-            this.customerEditorBtn.Location = new System.Drawing.Point(18, 415);
+            this.customerEditorBtn.Location = new System.Drawing.Point(12, 415);
             this.customerEditorBtn.Name = "customerEditorBtn";
             this.customerEditorBtn.Size = new System.Drawing.Size(109, 23);
             this.customerEditorBtn.TabIndex = 7;
@@ -126,9 +127,9 @@ namespace C969_Performance_Assessment
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 452);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 447);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(845, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1141, 22);
             this.statusStrip1.TabIndex = 8;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -142,7 +143,7 @@ namespace C969_Performance_Assessment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(845, 474);
+            this.ClientSize = new System.Drawing.Size(1141, 469);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.customerEditorBtn);
             this.Controls.Add(this.appointmentDGV);

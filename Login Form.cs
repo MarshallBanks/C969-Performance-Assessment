@@ -24,9 +24,10 @@ namespace C969_Performance_Assessment
 
         private string User { get; set; }
         private string Pass { get; set; }
-
+        
         private string DBUser { get; set; }
         private string DBPass { get; set; }
+        private int DBUserId { get; set; }
 
         private string loginCorrect;
         private string loginError;
@@ -78,13 +79,14 @@ namespace C969_Performance_Assessment
             {
                 MessageBox.Show(formEmpty);
                 return;
-            }
+            }   
 
             User = userBox.Text;
             Pass = passBox.Text;
+
             
 
-            string checkUsernamePassword = "SELECT userName, password FROM client_schedule.user WHERE userName=@User AND password=@Pass";
+            string checkUsernamePassword = "SELECT userId, userName, password FROM client_schedule.user WHERE userName=@User AND password=@Pass";
 
             MySqlCommand cmd = new MySqlCommand();
             cmd.CommandType = CommandType.Text;
@@ -99,13 +101,15 @@ namespace C969_Performance_Assessment
                 {
                     DBUser = reader["userName"].ToString();
                     DBPass = reader["password"].ToString();
+                    DBUserId = (int)reader["userId"];
                 }
                 
             }
 
             if (User == DBUser && Pass == DBPass)
             {
-                CurrentUser.instance.Name = User;
+                CurrentUser.instance.Name = DBUser;
+                CurrentUser.instance.Id = DBUserId;
 
                 MessageBox.Show(loginCorrect);
                                 

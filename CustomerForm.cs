@@ -120,5 +120,11 @@ namespace C969_Performance_Assessment
 
             }
         }
+
+        private void BackBtn_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            SchedulingForm.Instance.Show();
+        }
     }
 }
