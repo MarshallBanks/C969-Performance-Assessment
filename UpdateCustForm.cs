@@ -15,8 +15,6 @@ namespace C969_Performance_Assessment
 {
     public partial class UpdateCustForm : Form
     {
-        private readonly CustomerForm customerForm;
-
         private readonly int customerId;
 
         private string originalFullName;
@@ -28,10 +26,10 @@ namespace C969_Performance_Assessment
 
         
 
-        public UpdateCustForm(CustomerForm customerForm, DataGridViewRow selectedRow)
+        public UpdateCustForm(DataGridViewRow selectedRow)
         {
             InitializeComponent();
-            this.customerForm = customerForm;
+            
 
             // Save the ID of the selected customer to use in UPDATE query
             customerId = (int)selectedRow.Cells["Customer ID"].Value;
@@ -168,7 +166,7 @@ namespace C969_Performance_Assessment
                     cmd.ExecuteNonQuery();
                 }
 
-                customerForm.loadCustomers();
+                
 
                 this.Close();
             }

@@ -72,8 +72,9 @@ namespace C969_Performance_Assessment
             }
             else
             {
-                UpdateCustForm updateCustForm = new UpdateCustForm(this, customerDGV.CurrentRow);
+                UpdateCustForm updateCustForm = new UpdateCustForm(customerDGV.CurrentRow);
                 updateCustForm.ShowDialog();
+                loadCustomers();
             }
         }
 

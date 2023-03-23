@@ -91,6 +91,12 @@
     <Compile Include="AddApptForm.Designer.cs">
       <DependentUpon>AddApptForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UpdateApptForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateApptForm.Designer.cs">
+      <DependentUpon>UpdateApptForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SchedulingForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -129,6 +135,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddCustForm.resx">
       <DependentUpon>AddCustForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateApptForm.resx">
+      <DependentUpon>UpdateApptForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SchedulingForm.resx">
       <DependentUpon>SchedulingForm.cs</DependentUpon>

@@ -141,6 +141,7 @@ namespace C969_Performance_Assessment
             // 
             // typeComboBox
             // 
+            this.typeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.typeComboBox.FormattingEnabled = true;
             this.typeComboBox.Items.AddRange(new object[] {
             "Meeting",
@@ -211,6 +212,7 @@ namespace C969_Performance_Assessment
             this.startDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.startDateTimePicker.Location = new System.Drawing.Point(29, 37);
             this.startDateTimePicker.Margin = new System.Windows.Forms.Padding(2);
+            this.startDateTimePicker.MinDate = new System.DateTime(2001, 1, 1, 0, 0, 0, 0);
             this.startDateTimePicker.Name = "startDateTimePicker";
             this.startDateTimePicker.Size = new System.Drawing.Size(267, 20);
             this.startDateTimePicker.TabIndex = 41;

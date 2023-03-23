@@ -82,7 +82,7 @@ namespace C969_Performance_Assessment
             DateTime start = startDateTimePicker.Value;
             DateTime end = endDateTimePicker.Value;
             string addressInsert = "INSERT INTO appointment (customerId, userId, title, description, location, contact, type, url, start, end, createDate, createdBy, lastUpdate, lastUpdateBy) " +
-                                                    "VALUES (@CustomerId, @UserId, @Title, @Description, @Type, @Location, @Contact, @URL, @Start, @End, NOW(), @CreatedBy, NOW(), @LastUpdateBy);";
+                                                    "VALUES (@CustomerId, @UserId, @Title, @Description, @Location, @Contact, @Type, @URL, @Start, @End, NOW(), @CreatedBy, NOW(), @LastUpdateBy);";
             using (MySqlCommand cmd = new MySqlCommand(addressInsert, conn))
             {
                 cmd.Parameters.AddWithValue("@CustomerId", customerId);

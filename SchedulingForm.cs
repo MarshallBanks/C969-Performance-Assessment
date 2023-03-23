@@ -117,5 +117,18 @@ namespace C969_Performance_Assessment
                 }
             }
         }
+
+        private void updateButton_Click(object sender, EventArgs e)
+        {
+            if (!appointmentDGV.CurrentRow.Selected)
+            {
+                MessageBox.Show("Please select the customer you wish to update", "Nothing Selected", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            else
+            {
+                UpdateApptForm updateApptForm = new UpdateApptForm(appointmentDGV.CurrentRow);
+                updateApptForm.ShowDialog();
+            }
+        }
     }
 }
