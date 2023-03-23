@@ -128,6 +128,7 @@ namespace C969_Performance_Assessment
             {
                 UpdateApptForm updateApptForm = new UpdateApptForm(appointmentDGV.CurrentRow);
                 updateApptForm.ShowDialog();
+                loadAppointments();
             }
         }
     }

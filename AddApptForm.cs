@@ -76,7 +76,7 @@ namespace C969_Performance_Assessment
             string title = titleTextBox.Text;
             string description = descriptionTextBox.Text;
             string location = locationTextBox.Text;
-            string contact = customerComboBox.Text;
+            string contact = checkBox1.Checked ? customerComboBox.Text : contactTxtBox.Text;            
             string type = typeComboBox.Text;
             string url = urlTextBox.Text;
             DateTime start = startDateTimePicker.Value;

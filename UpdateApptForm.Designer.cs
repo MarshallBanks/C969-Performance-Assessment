@@ -38,7 +38,7 @@ namespace C969_Performance_Assessment
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.urlTextBox = new System.Windows.Forms.TextBox();
-            this.addButton = new System.Windows.Forms.Button();
+            this.updateButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.typeComboBox = new System.Windows.Forms.ComboBox();
             this.customerComboBox = new System.Windows.Forms.ComboBox();
@@ -141,15 +141,16 @@ namespace C969_Performance_Assessment
             this.urlTextBox.Size = new System.Drawing.Size(266, 20);
             this.urlTextBox.TabIndex = 59;
             // 
-            // addButton
+            // updateButton
             // 
-            this.addButton.Location = new System.Drawing.Point(170, 473);
-            this.addButton.Margin = new System.Windows.Forms.Padding(2);
-            this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(80, 26);
-            this.addButton.TabIndex = 58;
-            this.addButton.Text = "Add";
-            this.addButton.UseVisualStyleBackColor = true;
+            this.updateButton.Location = new System.Drawing.Point(170, 473);
+            this.updateButton.Margin = new System.Windows.Forms.Padding(2);
+            this.updateButton.Name = "updateButton";
+            this.updateButton.Size = new System.Drawing.Size(80, 26);
+            this.updateButton.TabIndex = 58;
+            this.updateButton.Text = "Update";
+            this.updateButton.UseVisualStyleBackColor = true;
+            this.updateButton.Click += new System.EventHandler(this.updateButton_Click);
             // 
             // cancelButton
             // 
@@ -187,6 +188,7 @@ namespace C969_Performance_Assessment
             this.customerComboBox.Name = "customerComboBox";
             this.customerComboBox.Size = new System.Drawing.Size(132, 21);
             this.customerComboBox.TabIndex = 55;
+            this.customerComboBox.SelectedIndexChanged += new System.EventHandler(this.customerComboBox_SelectedIndexChanged);
             // 
             // label5
             // 
@@ -287,7 +289,7 @@ namespace C969_Performance_Assessment
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.urlTextBox);
-            this.Controls.Add(this.addButton);
+            this.Controls.Add(this.updateButton);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.typeComboBox);
             this.Controls.Add(this.customerComboBox);
@@ -318,7 +320,7 @@ namespace C969_Performance_Assessment
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox urlTextBox;
-        private System.Windows.Forms.Button addButton;
+        private System.Windows.Forms.Button updateButton;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.ComboBox typeComboBox;
         private System.Windows.Forms.ComboBox customerComboBox;
