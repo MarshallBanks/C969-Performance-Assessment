@@ -29,8 +29,8 @@ namespace C969_Performance_Assessment
         /// </summary>
         private void InitializeComponent()
         {
-            this.monthlyButton = new System.Windows.Forms.RadioButton();
-            this.weeklyButton = new System.Windows.Forms.RadioButton();
+            this.currentMonthButton = new System.Windows.Forms.RadioButton();
+            this.currentWeekButton = new System.Windows.Forms.RadioButton();
             this.addButton = new System.Windows.Forms.Button();
             this.updateButton = new System.Windows.Forms.Button();
             this.deleteButton = new System.Windows.Forms.Button();
@@ -38,37 +38,42 @@ namespace C969_Performance_Assessment
             this.customerEditorBtn = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.noFilterButton = new System.Windows.Forms.RadioButton();
+            this.calendar = new System.Windows.Forms.MonthCalendar();
+            this.selectedMonthButton = new System.Windows.Forms.RadioButton();
+            this.selectedWeekButton = new System.Windows.Forms.RadioButton();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.appointmentDGV)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // monthlyButton
+            // currentMonthButton
             // 
-            this.monthlyButton.AutoSize = true;
-            this.monthlyButton.Location = new System.Drawing.Point(18, 122);
-            this.monthlyButton.Name = "monthlyButton";
-            this.monthlyButton.Size = new System.Drawing.Size(88, 17);
-            this.monthlyButton.TabIndex = 1;
-            this.monthlyButton.TabStop = true;
-            this.monthlyButton.Text = "Monthly View";
-            this.monthlyButton.UseVisualStyleBackColor = true;
+            this.currentMonthButton.AutoSize = true;
+            this.currentMonthButton.Location = new System.Drawing.Point(11, 204);
+            this.currentMonthButton.Name = "currentMonthButton";
+            this.currentMonthButton.Size = new System.Drawing.Size(92, 17);
+            this.currentMonthButton.TabIndex = 1;
+            this.currentMonthButton.Text = "Current Month";
+            this.currentMonthButton.UseVisualStyleBackColor = true;
+            this.currentMonthButton.Click += new System.EventHandler(this.currentMonthButton_Click);
             // 
-            // weeklyButton
+            // currentWeekButton
             // 
-            this.weeklyButton.AutoSize = true;
-            this.weeklyButton.Location = new System.Drawing.Point(18, 145);
-            this.weeklyButton.Name = "weeklyButton";
-            this.weeklyButton.Size = new System.Drawing.Size(87, 17);
-            this.weeklyButton.TabIndex = 2;
-            this.weeklyButton.TabStop = true;
-            this.weeklyButton.Text = "Weekly View";
-            this.weeklyButton.UseVisualStyleBackColor = true;
+            this.currentWeekButton.AutoSize = true;
+            this.currentWeekButton.Location = new System.Drawing.Point(11, 227);
+            this.currentWeekButton.Name = "currentWeekButton";
+            this.currentWeekButton.Size = new System.Drawing.Size(91, 17);
+            this.currentWeekButton.TabIndex = 2;
+            this.currentWeekButton.Text = "Current Week";
+            this.currentWeekButton.UseVisualStyleBackColor = true;
+            this.currentWeekButton.Click += new System.EventHandler(this.currentWeekButton_Click);
             // 
             // addButton
             // 
-            this.addButton.Location = new System.Drawing.Point(18, 12);
+            this.addButton.Location = new System.Drawing.Point(37, 295);
             this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(97, 28);
+            this.addButton.Size = new System.Drawing.Size(170, 28);
             this.addButton.TabIndex = 3;
             this.addButton.Text = "Add";
             this.addButton.UseVisualStyleBackColor = true;
@@ -76,9 +81,9 @@ namespace C969_Performance_Assessment
             // 
             // updateButton
             // 
-            this.updateButton.Location = new System.Drawing.Point(18, 46);
+            this.updateButton.Location = new System.Drawing.Point(37, 329);
             this.updateButton.Name = "updateButton";
-            this.updateButton.Size = new System.Drawing.Size(97, 28);
+            this.updateButton.Size = new System.Drawing.Size(170, 28);
             this.updateButton.TabIndex = 4;
             this.updateButton.Text = "Update";
             this.updateButton.UseVisualStyleBackColor = true;
@@ -86,9 +91,9 @@ namespace C969_Performance_Assessment
             // 
             // deleteButton
             // 
-            this.deleteButton.Location = new System.Drawing.Point(18, 80);
+            this.deleteButton.Location = new System.Drawing.Point(37, 363);
             this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(97, 28);
+            this.deleteButton.Size = new System.Drawing.Size(170, 28);
             this.deleteButton.TabIndex = 5;
             this.deleteButton.Text = "Delete";
             this.deleteButton.UseVisualStyleBackColor = true;
@@ -102,7 +107,7 @@ namespace C969_Performance_Assessment
             | System.Windows.Forms.AnchorStyles.Right)));
             this.appointmentDGV.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.appointmentDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.appointmentDGV.Location = new System.Drawing.Point(132, 12);
+            this.appointmentDGV.Location = new System.Drawing.Point(250, 12);
             this.appointmentDGV.Margin = new System.Windows.Forms.Padding(2);
             this.appointmentDGV.MultiSelect = false;
             this.appointmentDGV.Name = "appointmentDGV";
@@ -111,14 +116,14 @@ namespace C969_Performance_Assessment
             this.appointmentDGV.RowHeadersWidth = 51;
             this.appointmentDGV.RowTemplate.Height = 24;
             this.appointmentDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.appointmentDGV.Size = new System.Drawing.Size(997, 426);
+            this.appointmentDGV.Size = new System.Drawing.Size(879, 426);
             this.appointmentDGV.TabIndex = 6;
             // 
             // customerEditorBtn
             // 
-            this.customerEditorBtn.Location = new System.Drawing.Point(12, 415);
+            this.customerEditorBtn.Location = new System.Drawing.Point(37, 397);
             this.customerEditorBtn.Name = "customerEditorBtn";
-            this.customerEditorBtn.Size = new System.Drawing.Size(109, 23);
+            this.customerEditorBtn.Size = new System.Drawing.Size(170, 28);
             this.customerEditorBtn.TabIndex = 7;
             this.customerEditorBtn.Text = "Customer Editor";
             this.customerEditorBtn.UseVisualStyleBackColor = true;
@@ -140,19 +145,77 @@ namespace C969_Performance_Assessment
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(148, 17);
             this.toolStripStatusLabel1.Text = "Logged In As: Current User";
             // 
+            // noFilterButton
+            // 
+            this.noFilterButton.AutoSize = true;
+            this.noFilterButton.Checked = true;
+            this.noFilterButton.Location = new System.Drawing.Point(11, 250);
+            this.noFilterButton.Name = "noFilterButton";
+            this.noFilterButton.Size = new System.Drawing.Size(64, 17);
+            this.noFilterButton.TabIndex = 9;
+            this.noFilterButton.TabStop = true;
+            this.noFilterButton.Text = "No Filter";
+            this.noFilterButton.UseVisualStyleBackColor = true;
+            this.noFilterButton.Click += new System.EventHandler(this.noFilterButton_Click);
+            // 
+            // calendar
+            // 
+            this.calendar.Location = new System.Drawing.Point(10, 30);
+            this.calendar.Name = "calendar";
+            this.calendar.TabIndex = 10;
+            this.calendar.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.calendar_DateChanged);
+            this.calendar.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.calendar_DateSelected);
+            // 
+            // selectedMonthButton
+            // 
+            this.selectedMonthButton.AutoSize = true;
+            this.selectedMonthButton.Location = new System.Drawing.Point(108, 204);
+            this.selectedMonthButton.Name = "selectedMonthButton";
+            this.selectedMonthButton.Size = new System.Drawing.Size(100, 17);
+            this.selectedMonthButton.TabIndex = 11;
+            this.selectedMonthButton.Text = "Selected Month";
+            this.selectedMonthButton.UseVisualStyleBackColor = true;
+            this.selectedMonthButton.Click += new System.EventHandler(this.selectedMonthButton_Click);
+            // 
+            // selectedWeekButton
+            // 
+            this.selectedWeekButton.AutoSize = true;
+            this.selectedWeekButton.Location = new System.Drawing.Point(108, 227);
+            this.selectedWeekButton.Name = "selectedWeekButton";
+            this.selectedWeekButton.Size = new System.Drawing.Size(99, 17);
+            this.selectedWeekButton.TabIndex = 12;
+            this.selectedWeekButton.Text = "Selected Week";
+            this.selectedWeekButton.UseVisualStyleBackColor = true;
+            this.selectedWeekButton.Click += new System.EventHandler(this.selectedWeekButton_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(51, 12);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(144, 18);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "Appointment Filter";
+            // 
             // SchedulingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1141, 469);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.selectedWeekButton);
+            this.Controls.Add(this.selectedMonthButton);
+            this.Controls.Add(this.calendar);
+            this.Controls.Add(this.noFilterButton);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.customerEditorBtn);
             this.Controls.Add(this.appointmentDGV);
             this.Controls.Add(this.deleteButton);
             this.Controls.Add(this.updateButton);
             this.Controls.Add(this.addButton);
-            this.Controls.Add(this.weeklyButton);
-            this.Controls.Add(this.monthlyButton);
+            this.Controls.Add(this.currentWeekButton);
+            this.Controls.Add(this.currentMonthButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "SchedulingForm";
@@ -169,8 +232,8 @@ namespace C969_Performance_Assessment
         }
 
         #endregion
-        private System.Windows.Forms.RadioButton monthlyButton;
-        private System.Windows.Forms.RadioButton weeklyButton;
+        private System.Windows.Forms.RadioButton currentMonthButton;
+        private System.Windows.Forms.RadioButton currentWeekButton;
         private System.Windows.Forms.Button addButton;
         private System.Windows.Forms.Button updateButton;
         private System.Windows.Forms.Button deleteButton;
@@ -178,5 +241,10 @@ namespace C969_Performance_Assessment
         private System.Windows.Forms.Button customerEditorBtn;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.RadioButton noFilterButton;
+        private System.Windows.Forms.MonthCalendar calendar;
+        private System.Windows.Forms.RadioButton selectedMonthButton;
+        private System.Windows.Forms.RadioButton selectedWeekButton;
+        private System.Windows.Forms.Label label1;
     }
 }

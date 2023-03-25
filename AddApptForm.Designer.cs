@@ -210,7 +210,7 @@ namespace C969_Performance_Assessment
             this.startDateTimePicker.Checked = false;
             this.startDateTimePicker.CustomFormat = "dddd, MMMM dd, yyyy hh:mm tt";
             this.startDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.startDateTimePicker.Location = new System.Drawing.Point(29, 37);
+            this.startDateTimePicker.Location = new System.Drawing.Point(30, 34);
             this.startDateTimePicker.Margin = new System.Windows.Forms.Padding(2);
             this.startDateTimePicker.MinDate = new System.DateTime(2001, 1, 1, 0, 0, 0, 0);
             this.startDateTimePicker.Name = "startDateTimePicker";
@@ -230,7 +230,7 @@ namespace C969_Performance_Assessment
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(26, 22);
+            this.label7.Location = new System.Drawing.Point(26, 18);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(29, 13);

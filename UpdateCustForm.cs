@@ -99,77 +99,80 @@ namespace C969_Performance_Assessment
                 // Display an error message to the user
                 MessageBox.Show("Invalid address. Please enter a valid address with only letters, numbers, and basic punctuation marks.");
             }
-
             else
             {
-
-                string updateQuery = "UPDATE customer c INNER JOIN address a ON c.addressId = a.addressId SET ";
-                string fullName = fullNameBox.Text;
-                string address = addressBox.Text;
-                string postalCode = postalCodeBox.Text;
-                string phone = phoneNumberBox.Text;
-                string city = cityComboBox.Text;
-                int cityId = 0;
-                bool isActive = activeButton.Checked;
-
-                if (fullName != originalFullName)
-                {
-                    updateQuery += "c.customerName = @FullName, ";
-                }
-
-                if (address != originalAddress)
-                {
-                    updateQuery += "a.address = @Address, ";
-                }
-
-                if (postalCode != originalPostalCode)
-                {
-                    updateQuery += "a.postalCode = @PostalCode, ";
-                }
-
-                if (phone != originalPhoneNumber)
-                {
-                    updateQuery += "a.phone = @Phone, ";
-                }
-
-                if (city != originalCity)
-                {
-                    updateQuery += "a.cityId = @CityId, ";
-
-                    // Get cityId from the database
-                    string getCityIDQuery = "SELECT cityID FROM city WHERE city = @City;";
-                    using (MySqlCommand cmd = new MySqlCommand(getCityIDQuery, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@City", city);
-                        cityId = (int)cmd.ExecuteScalar();
-                    }
-                }
-
-                if (isActive != originalIsActive)
-                {
-                    updateQuery += "c.active = @Active, ";
-                }
-                
-                // Add lastUpdateBy and WHERE clause to the query
-                updateQuery += "c.lastUpdateBy = @LastUpdateBy WHERE c.customerId = @CustomerId;";
-
-                using (MySqlCommand cmd = new MySqlCommand(updateQuery, conn))
-                {
-                    cmd.Parameters.AddWithValue("@Address", address);
-                    cmd.Parameters.AddWithValue("@Phone", phone);
-                    cmd.Parameters.AddWithValue("@FullName", fullName);
-                    cmd.Parameters.AddWithValue("@PostalCode", postalCode);
-                    cmd.Parameters.AddWithValue("@CityId", cityId);
-                    cmd.Parameters.AddWithValue("@LastUpdateBy", CurrentUser.instance.Name);
-                    cmd.Parameters.AddWithValue("@Active", Convert.ToInt32(isActive));
-                    cmd.Parameters.AddWithValue("@CustomerId", customerId);
-                    cmd.ExecuteNonQuery();
-                }
-
-                
-
-                this.Close();
+                UpdateCustomer();
             }
+        }
+
+        private void UpdateCustomer()
+        {
+            string updateQuery = "UPDATE customer c INNER JOIN address a ON c.addressId = a.addressId SET ";
+            string fullName = fullNameBox.Text;
+            string address = addressBox.Text;
+            string postalCode = postalCodeBox.Text;
+            string phone = phoneNumberBox.Text;
+            string city = cityComboBox.Text;
+            int cityId = 0;
+            bool isActive = activeButton.Checked;
+
+            if (fullName != originalFullName)
+            {
+                updateQuery += "c.customerName = @FullName, ";
+            }
+
+            if (address != originalAddress)
+            {
+                updateQuery += "a.address = @Address, ";
+            }
+
+            if (postalCode != originalPostalCode)
+            {
+                updateQuery += "a.postalCode = @PostalCode, ";
+            }
+
+            if (phone != originalPhoneNumber)
+            {
+                updateQuery += "a.phone = @Phone, ";
+            }
+
+            if (city != originalCity)
+            {
+                updateQuery += "a.cityId = @CityId, ";
+
+                // Get cityId from the database
+                string getCityIDQuery = "SELECT cityID FROM city WHERE city = @City;";
+                using (MySqlCommand cmd = new MySqlCommand(getCityIDQuery, conn))
+                {
+                    cmd.Parameters.AddWithValue("@City", city);
+                    cityId = (int)cmd.ExecuteScalar();
+                }
+            }
+
+            if (isActive != originalIsActive)
+            {
+                updateQuery += "c.active = @Active, ";
+            }
+
+            // Add lastUpdateBy and WHERE clause to the query
+            updateQuery += "c.lastUpdate = UTC_TIMESTAMP(), c.lastUpdateBy = @LastUpdateBy WHERE c.customerId = @CustomerId;";
+
+            using (MySqlCommand cmd = new MySqlCommand(updateQuery, conn))
+            {
+                cmd.Parameters.AddWithValue("@Address", address);
+                cmd.Parameters.AddWithValue("@Phone", phone);
+                cmd.Parameters.AddWithValue("@FullName", fullName);
+                cmd.Parameters.AddWithValue("@PostalCode", postalCode);
+                cmd.Parameters.AddWithValue("@CityId", cityId);
+                cmd.Parameters.AddWithValue("@LastUpdateBy", CurrentUser.instance.Name);
+                cmd.Parameters.AddWithValue("@Active", Convert.ToInt32(isActive));
+                cmd.Parameters.AddWithValue("@CustomerId", customerId);
+                cmd.ExecuteNonQuery();
+            }
+
+
+
+            this.Close();
         }
 
 

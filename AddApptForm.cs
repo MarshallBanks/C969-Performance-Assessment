@@ -82,7 +82,13 @@ namespace C969_Performance_Assessment
             DateTime start = startDateTimePicker.Value;
             DateTime end = endDateTimePicker.Value;
             string addressInsert = "INSERT INTO appointment (customerId, userId, title, description, location, contact, type, url, start, end, createDate, createdBy, lastUpdate, lastUpdateBy) " +
-                                                    "VALUES (@CustomerId, @UserId, @Title, @Description, @Location, @Contact, @Type, @URL, @Start, @End, NOW(), @CreatedBy, NOW(), @LastUpdateBy);";
+                                                    "VALUES (@CustomerId, @UserId, @Title, @Description, @Location, @Contact, @Type, @URL, @Start, @End, UTC_TIMESTAMP(), @CreatedBy, UTC_TIMESTAMP(), @LastUpdateBy);";
+
+            // Convert start and end times to UTC
+            TimeZoneInfo userTimeZone = TimeZoneInfo.Local;
+            start = TimeZoneInfo.ConvertTimeToUtc(start, userTimeZone);
+            end = TimeZoneInfo.ConvertTimeToUtc(end, userTimeZone);
+
             using (MySqlCommand cmd = new MySqlCommand(addressInsert, conn))
             {
                 cmd.Parameters.AddWithValue("@CustomerId", customerId);

@@ -70,53 +70,57 @@ namespace C969_Performance_Assessment
 
             else
             {
-                string cityName = cityComboBox.SelectedItem.ToString();
-                int cityId;
-                string getCityIDQuery = "SELECT cityID FROM city WHERE city = @CityName;";
-                using (MySqlCommand cmd = new MySqlCommand(getCityIDQuery, conn))
-                {
-                    cmd.Parameters.AddWithValue("@CityName", cityName);
-                    cityId = (int)cmd.ExecuteScalar();
-                }
-
-
-                string postalCode = postalCodeBox.Text;
-                string phone = phoneNumberBox.Text;
-                string address = addressBox.Text;
-                string addressInsert = "INSERT INTO address (address, address2, cityId, postalCode, phone, createDate, createdBy, lastUpdateBy) VALUES (@Address, '', @CityId, @PostalCode, @Phone, NOW(), @CreatedBy, @LastUpdateBy);";
-                using (MySqlCommand cmd = new MySqlCommand(addressInsert, conn))
-                {
-                    cmd.Parameters.AddWithValue("@Address", address);
-                    cmd.Parameters.AddWithValue("@CityId", cityId);
-                    cmd.Parameters.AddWithValue("@Phone", phone);
-                    cmd.Parameters.AddWithValue("@PostalCode", postalCode);
-                    cmd.Parameters.AddWithValue("@CreatedBy", CurrentUser.instance.Name);
-                    cmd.Parameters.AddWithValue("@LastUpdateBy", CurrentUser.instance.Name);
-                    cmd.ExecuteNonQuery();
-                }
-
-                int addressId;
-                using (MySqlCommand cmd = new MySqlCommand("SELECT LAST_INSERT_ID();", conn))
-                {
-                    addressId = Convert.ToInt32(cmd.ExecuteScalar());
-                }
-
-                string name = fullNameBox.Text;
-                bool isActive = activeButton.Checked;
-                string customerInsert = "INSERT INTO customer (customerName, addressId, active, createDate, createdBy, lastUpdateBy) VALUES (@Name, @AddressID, @isActive, @CreatedDate, @CreatedBy, @LastUpdateBy );";
-                using (MySqlCommand cmd = new MySqlCommand(customerInsert, conn))
-                {
-                    cmd.Parameters.AddWithValue("@Name", name);
-                    cmd.Parameters.AddWithValue("@AddressID", addressId);
-                    cmd.Parameters.AddWithValue("@isActive", isActive ? 1 : 0);
-                    cmd.Parameters.AddWithValue("@CreatedBy", CurrentUser.instance.Name);
-                    cmd.Parameters.AddWithValue("@LastUpdateBy", CurrentUser.instance.Name);
-                    cmd.Parameters.AddWithValue("@CreatedDate", DateTime.Now.Date);
-                    cmd.ExecuteNonQuery();
-                }
-
-                this.Close();
+                createCustomer();
             }
+        }
+
+        private void createCustomer()
+        {
+            string cityName = cityComboBox.SelectedItem.ToString();
+            int cityId;
+            string getCityIDQuery = "SELECT cityID FROM city WHERE city = @CityName;";
+            using (MySqlCommand cmd = new MySqlCommand(getCityIDQuery, conn))
+            {
+                cmd.Parameters.AddWithValue("@CityName", cityName);
+                cityId = (int)cmd.ExecuteScalar();
+            }
+
+
+            string postalCode = postalCodeBox.Text;
+            string phone = phoneNumberBox.Text;
+            string address = addressBox.Text;
+            string addressInsert = "INSERT INTO address (address, address2, cityId, postalCode, phone, createDate, createdBy, lastUpdateBy) VALUES (@Address, '', @CityId, @PostalCode, @Phone, UTC_TIMESTAMP(), @CreatedBy, @LastUpdateBy);";
+            using (MySqlCommand cmd = new MySqlCommand(addressInsert, conn))
+            {
+                cmd.Parameters.AddWithValue("@Address", address);
+                cmd.Parameters.AddWithValue("@CityId", cityId);
+                cmd.Parameters.AddWithValue("@Phone", phone);
+                cmd.Parameters.AddWithValue("@PostalCode", postalCode);
+                cmd.Parameters.AddWithValue("@CreatedBy", CurrentUser.instance.Name);
+                cmd.Parameters.AddWithValue("@LastUpdateBy", CurrentUser.instance.Name);
+                cmd.ExecuteNonQuery();
+            }
+
+            int addressId;
+            using (MySqlCommand cmd = new MySqlCommand("SELECT LAST_INSERT_ID();", conn))
+            {
+                addressId = Convert.ToInt32(cmd.ExecuteScalar());
+            }
+
+            string name = fullNameBox.Text;
+            bool isActive = activeButton.Checked;
+            string customerInsert = "INSERT INTO customer (customerName, addressId, active, createDate, createdBy, lastUpdate, lastUpdateBy) VALUES (@Name, @AddressID, @isActive, UTC_TIMESTAMP(), @CreatedBy, UTC_TIMESTAMP(), @LastUpdateBy );";
+            using (MySqlCommand cmd = new MySqlCommand(customerInsert, conn))
+            {
+                cmd.Parameters.AddWithValue("@Name", name);
+                cmd.Parameters.AddWithValue("@AddressID", addressId);
+                cmd.Parameters.AddWithValue("@isActive", isActive);
+                cmd.Parameters.AddWithValue("@CreatedBy", CurrentUser.instance.Name);
+                cmd.Parameters.AddWithValue("@LastUpdateBy", CurrentUser.instance.Name);
+                cmd.ExecuteNonQuery();
+            }
+
+            this.Close();
         }
 
 

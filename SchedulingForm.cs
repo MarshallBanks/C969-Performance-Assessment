@@ -27,6 +27,15 @@ namespace C969_Performance_Assessment
             LoginForm.Instance.Show();
         }
 
+        private void setColumnVisibility(DataGridView dgv)
+        {
+            dgv.Columns["Appointment ID"].Visible = false;
+            dgv.Columns["Customer ID"].Visible = false;
+            dgv.Columns["Create Date"].Visible = false;
+            dgv.Columns["Last Update"].Visible = false;
+            dgv.Columns["Last Update By"].Visible = false;
+        }
+
         public void loadAppointments()
         {
             string getAppointmentData = "SELECT app.start AS 'Start', " +
@@ -40,7 +49,6 @@ namespace C969_Performance_Assessment
                                         "app.contact AS 'Contact', " +
                                         "app.type AS 'Type', " +
                                         "app.url AS 'URL', " +
-                                        
                                         "app.createDate AS 'Create Date', " +
                                         "app.createdBy AS 'Created By', " +
                                         "app.lastUpdate AS 'Last Update', " +
@@ -51,18 +59,23 @@ namespace C969_Performance_Assessment
 
             MySqlCommand cmd = new MySqlCommand(getAppointmentData, conn);
             MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
-            DataTable custDataTable = new DataTable();
-            adapter.Fill(custDataTable);
+            DataTable apptDataTable = new DataTable();
+            adapter.Fill(apptDataTable);
 
-            appointmentDGV.DataSource = custDataTable;
+            // Convert datetime values to the appropriate time zone for the user
+            TimeZoneInfo userTimeZone = TimeZoneInfo.Local;
+            foreach (DataRow row in apptDataTable.Rows)
+            {
+                row["Start"] = TimeZoneInfo.ConvertTimeFromUtc((DateTime)row["Start"], userTimeZone);
+                row["End"] = TimeZoneInfo.ConvertTimeFromUtc((DateTime)row["End"], userTimeZone);
+                row["Create Date"] = TimeZoneInfo.ConvertTimeFromUtc((DateTime)row["Create Date"], userTimeZone);
+                row["Last Update"] = TimeZoneInfo.ConvertTimeFromUtc((DateTime)row["Last Update"], userTimeZone);
+            }
+
+            appointmentDGV.DataSource = apptDataTable;
             appointmentDGV.ClearSelection();
 
-            // Set the visibility of the appointment ID, customer ID, create date, last update, and last update by columns to false
-            appointmentDGV.Columns["Appointment ID"].Visible = false;
-            appointmentDGV.Columns["Customer ID"].Visible = false;
-            appointmentDGV.Columns["Create Date"].Visible = false;
-            appointmentDGV.Columns["Last Update"].Visible = false;
-            appointmentDGV.Columns["Last Update By"].Visible = false;
+            setColumnVisibility(appointmentDGV);
         }
 
         private void SchedulingForm_Load(object sender, EventArgs e)
@@ -131,5 +144,100 @@ namespace C969_Performance_Assessment
                 loadAppointments();
             }
         }
+
+       
+
+        private void filterDataGridView(DateTime startDate, DateTime endDate)
+        {
+            // Added this to remove selected row
+            // Prevents error: 'Row associated with the currency manager's position cannot be made invisible.'
+            appointmentDGV.CurrentCell = null;
+
+            // Filter the DataGridView by the start date column
+            foreach (DataGridViewRow row in appointmentDGV.Rows)
+            {
+                DateTime date = (DateTime)row.Cells["Start"].Value;
+                if (date < startDate || date > endDate)
+                {
+                    row.Visible = false;
+                }
+                else
+                {
+                    row.Visible = true;
+                }
+
+            }
+
+        }
+
+        private void calendar_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            foreach (RadioButton rb in this.Controls.OfType<RadioButton>())
+            {
+                if (rb.Checked)
+                {
+                    rb.PerformClick();
+                    break;
+                }
+            }
+        }
+
+        private void calendar_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            foreach (RadioButton rb in this.Controls.OfType<RadioButton>())
+            {
+                if (rb.Checked)
+                {
+                    rb.PerformClick();
+                    break;
+                }
+            }
+        }
+
+        private void currentMonthButton_Click(object sender, EventArgs e)
+        {
+            // Filter by current month
+            DateTime startDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            DateTime endDate = startDate.AddMonths(1).AddDays(-1);
+            filterDataGridView(startDate, endDate);
+        }
+
+        private void selectedMonthButton_Click(object sender, EventArgs e)
+        {
+            // Filter by selected month
+            DateTime selectedDate = calendar.SelectionStart;
+            DateTime startDate = new DateTime(selectedDate.Year, selectedDate.Month, 1);
+            DateTime endDate = startDate.AddMonths(1).AddDays(-1);
+            filterDataGridView(startDate, endDate);
+        }
+
+        private void currentWeekButton_Click(object sender, EventArgs e)
+        {
+            // Filter by selected week
+            int difference = DayOfWeek.Monday - DateTime.Now.DayOfWeek;
+            DateTime startDate = DateTime.Now.AddDays(difference);
+            DateTime endDate = startDate.AddDays(6);
+            filterDataGridView(startDate, endDate);
+        }
+
+        private void selectedWeekButton_Click(object sender, EventArgs e)
+        {
+            // Filter by current week
+            DateTime selectedDate = calendar.SelectionStart;
+            int difference = DayOfWeek.Monday - selectedDate.DayOfWeek;
+            DateTime startDate = selectedDate.AddDays(difference);
+            DateTime endDate = startDate.AddDays(6);
+            filterDataGridView(startDate, endDate);
+        }
+
+        private void noFilterButton_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in appointmentDGV.Rows)
+            {
+                row.Visible = true;
+            }
+            return;
+        }
+
     }
 }

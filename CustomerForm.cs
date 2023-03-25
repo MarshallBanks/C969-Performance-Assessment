@@ -34,9 +34,9 @@ namespace C969_Performance_Assessment
                                         "addr.postalCode AS 'Postal Code', " +
                                         "addr.phone AS 'Phone', " +
                                         "cust.active AS 'Active', " +
-                                        "cust.createDate AS 'Created Date', " +
+                                        "cust.createDate AS 'Create Date', " +
                                         "cust.createdBy AS 'Created By', " +
-                                        "cust.lastUpdate AS 'Last Updated', " +
+                                        "cust.lastUpdate AS 'Last Update', " +
                                         "cust.lastUpdateBy AS 'Last Updated By' " +
                                         "FROM customer cust " +
                                         "JOIN address addr on cust.addressId = addr.addressId " +
@@ -47,6 +47,14 @@ namespace C969_Performance_Assessment
             MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
             DataTable custDataTable = new DataTable();
             adapter.Fill(custDataTable);
+
+            // Convert datetime values to the appropriate time zone for the user
+            TimeZoneInfo userTimeZone = TimeZoneInfo.Local;
+            foreach (DataRow row in custDataTable.Rows)
+            {
+                row["Create Date"] = TimeZoneInfo.ConvertTimeFromUtc((DateTime)row["Create Date"], userTimeZone);
+                row["Last Update"] = TimeZoneInfo.ConvertTimeFromUtc((DateTime)row["Last Update"], userTimeZone);
+            }
 
             customerDGV.DataSource = custDataTable;
             customerDGV.ClearSelection();

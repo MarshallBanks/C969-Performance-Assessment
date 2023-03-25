@@ -57,6 +57,12 @@ namespace C969_Performance_Assessment
             urlTextBox.Text = originalURL;
             startDateTimePicker.Value = originalStartDateTime;
             endDateTimePicker.Value = originalEndDateTime;
+
+            // Set the values of the status labels
+            toolStripStatusLabel1.Text = "Created By User: " + (string)selectedRow.Cells["Created By"].Value;
+            toolStripStatusLabel2.Text = "Create Date: " + ((DateTime)selectedRow.Cells["Create Date"].Value).ToString("g");
+            toolStripStatusLabel3.Text = "Last Update By User: " + (string)selectedRow.Cells["Last Update By"].Value;
+            toolStripStatusLabel4.Text = "Last Update: " + ((DateTime)selectedRow.Cells["Last Update"].Value).ToString("g");
         }
 
         public void loadCustomerNames()
@@ -214,7 +220,12 @@ namespace C969_Performance_Assessment
             }
 
             // Add lastUpdateBy and WHERE clause to the query
-            updateAppQuery += "lastUpdateBy = @LastUpdateBy WHERE appointmentId = @AppointmentId;";
+            updateAppQuery += "lastUpdate = UTC_TIMESTAMP(), lastUpdateBy = @LastUpdateBy WHERE appointmentId = @AppointmentId;";
+
+            // Convert start and end times to UTC
+            TimeZoneInfo userTimeZone = TimeZoneInfo.Local;
+            start = TimeZoneInfo.ConvertTimeToUtc(start, userTimeZone);
+            end = TimeZoneInfo.ConvertTimeToUtc(end, userTimeZone);
 
             using (MySqlCommand cmd = new MySqlCommand(updateAppQuery, conn))
             {
