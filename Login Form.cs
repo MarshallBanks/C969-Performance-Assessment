@@ -95,32 +95,42 @@ namespace C969_Performance_Assessment
             cmd.Parameters.AddWithValue("@Pass", Pass);
             cmd.Connection = conn;
 
-            using (MySqlDataReader reader = cmd.ExecuteReader())
+            try
             {
-                if (reader.Read())
+                using (MySqlDataReader reader = cmd.ExecuteReader())
                 {
-                    DBUser = reader["userName"].ToString();
-                    DBPass = reader["password"].ToString();
-                    DBUserId = (int)reader["userId"];
+                    if (reader.Read())
+                    {
+                        DBUser = reader["userName"].ToString();
+                        DBPass = reader["password"].ToString();
+                        DBUserId = (int)reader["userId"];
+                    }
+
                 }
-                
+
+                if (User == DBUser && Pass == DBPass)
+                {
+                    CurrentUser.instance.Name = DBUser;
+                    CurrentUser.instance.Id = DBUserId;
+
+                    MessageBox.Show(loginCorrect);
+
+                    SchedulingForm schedulingForm = new SchedulingForm();
+                    schedulingForm.Show();
+                    this.Hide();
+                }
+                else
+                {
+                    MessageBox.Show(loginError);
+                }
             }
-
-            if (User == DBUser && Pass == DBPass)
+            catch(MySqlException ex)
             {
-                CurrentUser.instance.Name = DBUser;
-                CurrentUser.instance.Id = DBUserId;
-
-                MessageBox.Show(loginCorrect);
-                                
-                SchedulingForm schedulingForm = new SchedulingForm();
-                schedulingForm.Show();
-                this.Hide();
-
+                MessageBox.Show($"An error occurred while logging in: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else
+            catch(Exception ex)
             {
-                MessageBox.Show(loginError);
+                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

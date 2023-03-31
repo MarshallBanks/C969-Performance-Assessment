@@ -107,6 +107,7 @@ namespace C969_Performance_Assessment
                 }
                 else
                 {
+                    // Get the address ID to use in DELETE query
                     int addressId;
                     string getAddressId = "SELECT addressID FROM customer WHERE customerId = @CustomerId;";
                     using (MySqlCommand cmd = new MySqlCommand(getAddressId, conn))
@@ -115,15 +116,30 @@ namespace C969_Performance_Assessment
                         addressId = (int)cmd.ExecuteScalar();
                     }
                     
-                    string deleteCustomer = "DELETE FROM customer WHERE customerId = @CustomerId; DELETE FROM address WHERE addressId = @AddressId;";
-                    using (MySqlCommand cmd = new MySqlCommand(deleteCustomer, conn))
+                    try
                     {
-                        cmd.Parameters.AddWithValue("@CustomerId", customerId);
-                        cmd.Parameters.AddWithValue("@AddressId", addressId);
-                        cmd.ExecuteNonQuery();
-                    }
+                        string deleteCustomer = "DELETE FROM customer WHERE customerId = @CustomerId; DELETE FROM address WHERE addressId = @AddressId;";
+                        using (MySqlCommand cmd = new MySqlCommand(deleteCustomer, conn))
+                        {
+                            cmd.Parameters.AddWithValue("@CustomerId", customerId);
+                            cmd.Parameters.AddWithValue("@AddressId", addressId);
+                            cmd.ExecuteNonQuery();
+                        }
 
-                    this.loadCustomers();
+                        this.loadCustomers();
+                    }
+                    catch (MySqlException ex)
+                    {
+                        if (ex.Number == 1451)
+                        {
+                            MessageBox.Show($"Cannot delete customer because there are one or more appointments assigned to this customer. (Customer ID: {customerId}).", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        else
+                        {
+                            MessageBox.Show($"An error occurred while deleting customer: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    
                 }
 
 

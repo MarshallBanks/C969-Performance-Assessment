@@ -15,6 +15,8 @@ namespace C969_Performance_Assessment
 {
     public partial class AddApptForm : Form
     {
+        
+
         public AddApptForm()
         {
             InitializeComponent();
@@ -22,6 +24,20 @@ namespace C969_Performance_Assessment
 
         private void AddButton_Click(object sender, EventArgs e)
         {
+            DateTime start = startDateTimePicker.Value;
+            DateTime end = endDateTimePicker.Value;
+
+            if (overlappingAppointment(start, end))
+            {
+                MessageBox.Show("The appointment cannot overlap with an existing appointment.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            // Check within business hours
+            if (outsideBusinessHours(start, end))
+            {
+                MessageBox.Show("The appointment cannot be scheduled outside of business hours. Business hours are 8:00 AM - 5:00 PM M-F.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             // Check for empty fields
             if (string.IsNullOrWhiteSpace(titleTextBox.Text) ||
                 string.IsNullOrWhiteSpace(typeComboBox.Text) ||
@@ -31,6 +47,7 @@ namespace C969_Performance_Assessment
                 MessageBox.Show("Check required fields. Fields marked with an asterisk (*) are required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            // Check if appointment overlaps with existing appointments
             else if (titleTextBox.Text.Length < 4)
             {
                 // Display an error message to the user
@@ -70,7 +87,67 @@ namespace C969_Performance_Assessment
             }
         }
 
-        private void createAppointment()
+        private bool outsideBusinessHours(DateTime start, DateTime end)
+        {
+            DateTime businessHoursStart = DateTime.Today.AddHours(8); // 8 AM
+            DateTime businessHoursEnd = DateTime.Today.AddHours(17); // 5 PM
+
+            if (start.TimeOfDay < businessHoursStart.TimeOfDay || start.TimeOfDay > businessHoursEnd.TimeOfDay ||
+                  end.TimeOfDay < businessHoursStart.TimeOfDay || end.TimeOfDay > businessHoursEnd.TimeOfDay)
+            {
+                return true;
+            }
+            else if (start.DayOfWeek == DayOfWeek.Saturday || start.DayOfWeek == DayOfWeek.Sunday ||
+                      end.DayOfWeek == DayOfWeek.Saturday || end.DayOfWeek == DayOfWeek.Sunday)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private bool overlappingAppointment(DateTime start, DateTime end)
+        {
+            // REMOVE
+            // MessageBox.Show("overLappingAppointment reached.");
+
+            string overlapCheckQuery = "SELECT COUNT(*) FROM appointment WHERE(start BETWEEN DATE_FORMAT(@Start, '%Y-%m-%d %H:%i:%s') AND DATE_FORMAT(@End, '%Y-%m-%d %H:%i:%s')) AND createdBy = @CurrentUser; ";
+            using (MySqlCommand cmd = new MySqlCommand(overlapCheckQuery, conn))
+            {
+                cmd.Parameters.AddWithValue("@Start", start.ToUniversalTime());
+                cmd.Parameters.AddWithValue("@End", end.ToUniversalTime());
+                cmd.Parameters.AddWithValue("@CurrentUser", CurrentUser.instance.Name);
+
+                // REMOVE
+                // MessageBox.Show(start.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss") + " is the start time " + end.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss") + " is the end time.");
+
+                object result = cmd.ExecuteScalar();
+
+                // REMOVE
+                // MessageBox.Show("Here is the result: " + result.ToString());
+
+                if(result == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    int count = Convert.ToInt32(result);
+
+                    // REMOVE
+                    // MessageBox.Show(count.ToString());
+
+                    return count > 0;
+                }
+            }  
+        }
+
+
+
+
+private void createAppointment()
         {
             int customerId = (int)customerComboBox.SelectedValue;
             string title = titleTextBox.Text;
@@ -105,8 +182,7 @@ namespace C969_Performance_Assessment
                 cmd.Parameters.AddWithValue("@LastUpdateBy", CurrentUser.instance.Name);
                 cmd.ExecuteNonQuery();
             }
-            MessageBox.Show("Start Date/Time: " + startDateTimePicker.Value.ToString() + "\n" +
-            "End Date/Time: " + endDateTimePicker.Value.ToString());
+            
 
             this.Close();
         }

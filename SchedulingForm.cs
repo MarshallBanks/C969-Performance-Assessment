@@ -78,9 +78,40 @@ namespace C969_Performance_Assessment
             setColumnVisibility(appointmentDGV);
         }
 
+        private void checkForUpcomingAppointments()
+        {
+
+            DateTime now = DateTime.Now;
+            DateTime next15Minutes = now.AddMinutes(15);
+
+            // Query the database to check for upcoming appointments within 15 minutes
+            string query = "SELECT COUNT(*) FROM appointment WHERE start BETWEEN @Now AND @Next15Minutes AND createdBy = @user";
+            using (MySqlCommand cmd = new MySqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@Now", now.ToUniversalTime());
+                cmd.Parameters.AddWithValue("@Next15Minutes", next15Minutes.ToUniversalTime());
+                cmd.Parameters.AddWithValue("@user", CurrentUser.instance.Name);
+
+                int count = Convert.ToInt32(cmd.ExecuteScalar());
+
+                if (count == 1)
+                {
+                    // Display the alert
+                    MessageBox.Show("You have an appointment coming up in 15 minutes!", "Appointment Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                if (count > 1)
+                {
+                    // Display the alert
+                    MessageBox.Show($"You have {count} appointments coming up in 15 minutes!", "Appointment Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+            }
+        }
+
         private void SchedulingForm_Load(object sender, EventArgs e)
         {
             loadAppointments();
+            checkForUpcomingAppointments();
         }
 
         private void addButton_Click(object sender, EventArgs e)
@@ -239,5 +270,9 @@ namespace C969_Performance_Assessment
             return;
         }
 
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            checkForUpcomingAppointments();
+        }
     }
 }

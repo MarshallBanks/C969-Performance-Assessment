@@ -118,8 +118,21 @@ namespace C969_Performance_Assessment
 
         private void updateButton_Click(object sender, EventArgs e)
         {
+            DateTime start = startDateTimePicker.Value;
+            DateTime end = endDateTimePicker.Value;
+
+            if (overlappingAppointment(start, end, appointmentId))
+            {
+                MessageBox.Show("The appointment cannot overlap with an existing appointment.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (outsideBusinessHours())
+            {
+                MessageBox.Show("The appointment cannot be scheduled outside of business hours. Business hours are 8:00 AM - 5:00 PM M-F.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             // Check for empty fields
-            if (string.IsNullOrWhiteSpace(titleTextBox.Text) ||
+            else if (string.IsNullOrWhiteSpace(titleTextBox.Text) ||
                 string.IsNullOrWhiteSpace(typeComboBox.Text) ||
                 string.IsNullOrWhiteSpace(customerComboBox.Text) ||
                 string.IsNullOrWhiteSpace(locationTextBox.Text))
@@ -166,6 +179,61 @@ namespace C969_Performance_Assessment
             }
         }
 
+        private bool outsideBusinessHours()
+        {
+            DateTime businessHoursStart = DateTime.Today.AddHours(8); // 8 AM
+            DateTime businessHoursEnd = DateTime.Today.AddHours(17); // 5 PM
+
+            DateTime start = startDateTimePicker.Value;
+            DateTime end = endDateTimePicker.Value;
+
+            if (start.TimeOfDay < businessHoursStart.TimeOfDay || start.TimeOfDay > businessHoursEnd.TimeOfDay ||
+                  end.TimeOfDay < businessHoursStart.TimeOfDay ||   end.TimeOfDay > businessHoursEnd.TimeOfDay)
+            {
+                return true;
+            }
+            else if (start.DayOfWeek == DayOfWeek.Saturday || start.DayOfWeek == DayOfWeek.Sunday ||
+                      end.DayOfWeek  == DayOfWeek.Saturday ||   end.DayOfWeek == DayOfWeek.Sunday)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private bool overlappingAppointment(DateTime start, DateTime end, int appointmentId)
+        {
+            //MessageBox.Show("overLappingAppointment reached.");
+
+            string overlapCheckQuery = "SELECT COUNT(*) FROM appointment WHERE(createdBy = @CurrentUser) AND ((@Start BETWEEN start AND end) OR (@End BETWEEN start AND end) OR (start BETWEEN @Start AND @End) OR (end BETWEEN @Start AND @End)) AND appointmentId != @AppointmentId;";
+
+            using (MySqlCommand cmd = new MySqlCommand(overlapCheckQuery, conn))
+            {
+                cmd.Parameters.AddWithValue("@Start", start.ToUniversalTime());
+                cmd.Parameters.AddWithValue("@End", end.ToUniversalTime());
+                cmd.Parameters.AddWithValue("@AppointmentId", appointmentId);
+                cmd.Parameters.AddWithValue("@CurrentUser", CurrentUser.instance.Name);
+
+                //MessageBox.Show(start.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss") + " is the start time " + end.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss") + " is the end time.");
+
+                object result = cmd.ExecuteScalar();
+
+                //MessageBox.Show("Here is the result: " + result.ToString());
+
+                if (result == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    int count = Convert.ToInt32(result);
+
+                    return count > 0;
+                }
+            }
+        }
 
         private void updateAppointment()
         {

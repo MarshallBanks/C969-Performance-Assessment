@@ -29,6 +29,7 @@ namespace C969_Performance_Assessment
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.currentMonthButton = new System.Windows.Forms.RadioButton();
             this.currentWeekButton = new System.Windows.Forms.RadioButton();
             this.addButton = new System.Windows.Forms.Button();
@@ -43,6 +44,7 @@ namespace C969_Performance_Assessment
             this.selectedMonthButton = new System.Windows.Forms.RadioButton();
             this.selectedWeekButton = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.appointmentDGV)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -198,6 +200,11 @@ namespace C969_Performance_Assessment
             this.label1.TabIndex = 13;
             this.label1.Text = "Appointment Filter";
             // 
+            // timer1
+            // 
+            this.timer1.Interval = 60000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // SchedulingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -246,5 +253,6 @@ namespace C969_Performance_Assessment
         private System.Windows.Forms.RadioButton selectedMonthButton;
         private System.Windows.Forms.RadioButton selectedWeekButton;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Timer timer1;
     }
 }
