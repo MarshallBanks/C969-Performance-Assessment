@@ -29,76 +29,106 @@ namespace C969_Performance_Assessment
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.typeCountByMonth = new System.Windows.Forms.RadioButton();
+            this.appointmentsByConsultant = new System.Windows.Forms.RadioButton();
+            this.appointmentByCustomer = new System.Windows.Forms.RadioButton();
+            this.backButton = new System.Windows.Forms.Button();
+            this.reportDataGridView = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.reportDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // typeCountByMonth
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(250, 12);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(879, 426);
-            this.dataGridView1.TabIndex = 0;
+            this.typeCountByMonth.AutoSize = true;
+            this.typeCountByMonth.Location = new System.Drawing.Point(12, 12);
+            this.typeCountByMonth.Name = "typeCountByMonth";
+            this.typeCountByMonth.Size = new System.Drawing.Size(128, 17);
+            this.typeCountByMonth.TabIndex = 1;
+            this.typeCountByMonth.TabStop = true;
+            this.typeCountByMonth.Text = "Type Count By Month";
+            this.typeCountByMonth.UseVisualStyleBackColor = true;
+            this.typeCountByMonth.CheckedChanged += new System.EventHandler(this.typeCountByMonth_CheckedChanged);
             // 
-            // radioButton1
+            // appointmentsByConsultant
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(12, 58);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(128, 17);
-            this.radioButton1.TabIndex = 1;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Type Count By Month";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.appointmentsByConsultant.AutoSize = true;
+            this.appointmentsByConsultant.Location = new System.Drawing.Point(12, 35);
+            this.appointmentsByConsultant.Name = "appointmentsByConsultant";
+            this.appointmentsByConsultant.Size = new System.Drawing.Size(157, 17);
+            this.appointmentsByConsultant.TabIndex = 2;
+            this.appointmentsByConsultant.TabStop = true;
+            this.appointmentsByConsultant.Text = "Appointments By Consultant";
+            this.appointmentsByConsultant.UseVisualStyleBackColor = true;
+            this.appointmentsByConsultant.CheckedChanged += new System.EventHandler(this.appointmentsByConsultant_CheckedChanged);
             // 
-            // radioButton2
+            // appointmentByCustomer
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(12, 81);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(85, 17);
-            this.radioButton2.TabIndex = 2;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "radioButton2";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.appointmentByCustomer.AutoSize = true;
+            this.appointmentByCustomer.Location = new System.Drawing.Point(12, 58);
+            this.appointmentByCustomer.Name = "appointmentByCustomer";
+            this.appointmentByCustomer.Size = new System.Drawing.Size(146, 17);
+            this.appointmentByCustomer.TabIndex = 3;
+            this.appointmentByCustomer.TabStop = true;
+            this.appointmentByCustomer.Text = "Appointment By Customer";
+            this.appointmentByCustomer.UseVisualStyleBackColor = true;
+            this.appointmentByCustomer.CheckedChanged += new System.EventHandler(this.appointmentByCustomer_CheckedChanged);
             // 
-            // radioButton3
+            // backButton
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(12, 104);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(85, 17);
-            this.radioButton3.TabIndex = 3;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "radioButton3";
-            this.radioButton3.UseVisualStyleBackColor = true;
+            this.backButton.Location = new System.Drawing.Point(12, 81);
+            this.backButton.Name = "backButton";
+            this.backButton.Size = new System.Drawing.Size(98, 32);
+            this.backButton.TabIndex = 4;
+            this.backButton.Text = "<- Back";
+            this.backButton.UseVisualStyleBackColor = true;
+            this.backButton.Click += new System.EventHandler(this.backButton_Click);
+            // 
+            // reportDataGridView
+            // 
+            this.reportDataGridView.AllowUserToAddRows = false;
+            this.reportDataGridView.AllowUserToResizeRows = false;
+            this.reportDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.reportDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.reportDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.reportDataGridView.Location = new System.Drawing.Point(251, 12);
+            this.reportDataGridView.Margin = new System.Windows.Forms.Padding(2);
+            this.reportDataGridView.MultiSelect = false;
+            this.reportDataGridView.Name = "reportDataGridView";
+            this.reportDataGridView.ReadOnly = true;
+            this.reportDataGridView.RowHeadersVisible = false;
+            this.reportDataGridView.RowHeadersWidth = 51;
+            this.reportDataGridView.RowTemplate.Height = 24;
+            this.reportDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.reportDataGridView.Size = new System.Drawing.Size(879, 426);
+            this.reportDataGridView.TabIndex = 7;
             // 
             // ReportingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1141, 469);
-            this.Controls.Add(this.radioButton3);
-            this.Controls.Add(this.radioButton2);
-            this.Controls.Add(this.radioButton1);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.reportDataGridView);
+            this.Controls.Add(this.backButton);
+            this.Controls.Add(this.appointmentByCustomer);
+            this.Controls.Add(this.appointmentsByConsultant);
+            this.Controls.Add(this.typeCountByMonth);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ReportingForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Reports";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ReportingForm_FormClosed);
+            ((System.ComponentModel.ISupportInitialize)(this.reportDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.RadioButton typeCountByMonth;
+        private System.Windows.Forms.RadioButton appointmentsByConsultant;
+        private System.Windows.Forms.RadioButton appointmentByCustomer;
+        private System.Windows.Forms.Button backButton;
+        private System.Windows.Forms.DataGridView reportDataGridView;
     }
 }

@@ -50,7 +50,8 @@ namespace C969_Performance_Assessment
                 MessageBox.Show("Invalid phone number. Please enter a 10-digit phone number.");
             }
             // Check the full name for only letters and spaces
-            else if (!(new Regex("^[a-zA-Z\\s]+$")).IsMatch(fullNameBox.Text))
+            // Using the LAMBDA expression is easier to read and in some cases faster if the regex expression is complicated
+            else if (!fullNameBox.Text.All(c => char.IsLetter(c) || c == ' '))
             {
                 // Display an error message to the user
                 MessageBox.Show("Full Name can only contain spaces and letters.");
@@ -62,12 +63,13 @@ namespace C969_Performance_Assessment
                 MessageBox.Show("Invalid postal code. Please enter a 5-digit postal code.");
             }
             // Check the address for invalid characters
-            else if (!(new Regex("^^[a-zA-Z0-9 #&.,'-]*$")).IsMatch(addressBox.Text))
+            // Using the LAMBDA is easier to read than using a regex: else if (!(new Regex("^^[a-zA-Z0-9 #&.,'-]*$")).IsMatch(addressBox.Text))
+            // so, better maintainability if someone else reads it and like stated above, it can be faster if the regex patter is complex. 
+            else if (!addressBox.Text.All(c => char.IsLetterOrDigit(c) || c == ' ' || c == '#' || c == '&' || c == '.' || c == ',' || c == '-' || c == '\''))
             {
                 // Display an error message to the user
                 MessageBox.Show("Invalid address. Please enter a valid address with only letters, numbers, and basic punctuation marks.");
             }
-
             else
             {
                 createCustomer();

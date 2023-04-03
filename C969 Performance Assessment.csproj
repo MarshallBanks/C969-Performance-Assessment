@@ -71,7 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CurrentUser.cs" />
-    <Compile Include="CustomerData.cs" />
+    <Compile Include="DatabaseHelper.cs" />
     <Compile Include="Database\DBConnection.cs" />
     <Compile Include="CustomerForm.cs">
       <SubType>Form</SubType>

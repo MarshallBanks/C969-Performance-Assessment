@@ -13,6 +13,7 @@ using static C969_Performance_Assessment.Database.DBConnection;
 using System.Globalization;
 using System.Resources;
 using System.Diagnostics;
+using System.IO;
 
 namespace C969_Performance_Assessment
 {
@@ -118,6 +119,19 @@ namespace C969_Performance_Assessment
                     SchedulingForm schedulingForm = new SchedulingForm();
                     schedulingForm.Show();
                     this.Hide();
+
+                    StringBuilder logData = new StringBuilder();
+
+                    // log file in the bin file of the project.
+                    string logFilePath = "user_activity_log.txt";
+
+                    logData.AppendLine($"{DateTime.Now} - {CurrentUser.instance.Name} logged in.");
+
+                    using (StreamWriter streamWriter = File.AppendText(logFilePath))
+                    {
+                        streamWriter.WriteLine(logData);
+                    }
+
                 }
                 else
                 {

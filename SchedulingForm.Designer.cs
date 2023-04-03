@@ -45,6 +45,7 @@ namespace C969_Performance_Assessment
             this.selectedWeekButton = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.reportsButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.appointmentDGV)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -73,7 +74,7 @@ namespace C969_Performance_Assessment
             // 
             // addButton
             // 
-            this.addButton.Location = new System.Drawing.Point(37, 295);
+            this.addButton.Location = new System.Drawing.Point(37, 273);
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(170, 28);
             this.addButton.TabIndex = 3;
@@ -83,7 +84,7 @@ namespace C969_Performance_Assessment
             // 
             // updateButton
             // 
-            this.updateButton.Location = new System.Drawing.Point(37, 329);
+            this.updateButton.Location = new System.Drawing.Point(37, 307);
             this.updateButton.Name = "updateButton";
             this.updateButton.Size = new System.Drawing.Size(170, 28);
             this.updateButton.TabIndex = 4;
@@ -93,7 +94,7 @@ namespace C969_Performance_Assessment
             // 
             // deleteButton
             // 
-            this.deleteButton.Location = new System.Drawing.Point(37, 363);
+            this.deleteButton.Location = new System.Drawing.Point(37, 341);
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(170, 28);
             this.deleteButton.TabIndex = 5;
@@ -123,7 +124,7 @@ namespace C969_Performance_Assessment
             // 
             // customerEditorBtn
             // 
-            this.customerEditorBtn.Location = new System.Drawing.Point(37, 397);
+            this.customerEditorBtn.Location = new System.Drawing.Point(37, 375);
             this.customerEditorBtn.Name = "customerEditorBtn";
             this.customerEditorBtn.Size = new System.Drawing.Size(170, 28);
             this.customerEditorBtn.TabIndex = 7;
@@ -205,11 +206,22 @@ namespace C969_Performance_Assessment
             this.timer1.Interval = 60000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // reportsButton
+            // 
+            this.reportsButton.Location = new System.Drawing.Point(37, 409);
+            this.reportsButton.Name = "reportsButton";
+            this.reportsButton.Size = new System.Drawing.Size(170, 28);
+            this.reportsButton.TabIndex = 14;
+            this.reportsButton.Text = "Reports";
+            this.reportsButton.UseVisualStyleBackColor = true;
+            this.reportsButton.Click += new System.EventHandler(this.reportsButton_Click);
+            // 
             // SchedulingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1141, 469);
+            this.Controls.Add(this.reportsButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.selectedWeekButton);
             this.Controls.Add(this.selectedMonthButton);
@@ -254,5 +266,6 @@ namespace C969_Performance_Assessment
         private System.Windows.Forms.RadioButton selectedWeekButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Button reportsButton;
     }
 }

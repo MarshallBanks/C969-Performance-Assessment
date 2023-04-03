@@ -274,5 +274,12 @@ namespace C969_Performance_Assessment
         {
             checkForUpcomingAppointments();
         }
+
+        private void reportsButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            ReportingForm reportingForm = new ReportingForm();
+            reportingForm.Show();
+        }
     }
 }
