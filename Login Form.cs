@@ -48,8 +48,20 @@ namespace C969_Performance_Assessment
         private void Form1_Load(object sender, EventArgs e)
         {
             ResourceManager rm;
+            RegionInfo currentRegion = new RegionInfo(CultureInfo.CurrentCulture.Name);
 
-            if (CultureInfo.CurrentUICulture.Name == "es-MX")
+            //// Checks if display language is set to Spanish-MX
+            //if (CultureInfo.CurrentUICulture.Name == "es-MX")
+            //{
+            //    rm = new ResourceManager("C969_Performance_Assessment.Strings_es-MX", typeof(LoginForm).Assembly);
+            //}
+            //else
+            //{
+            //    rm = new ResourceManager("C969_Performance_Assessment.Strings_en-US", typeof(LoginForm).Assembly);
+            //}
+
+            // Checks the region settings
+            if(currentRegion.TwoLetterISORegionName == "MX")
             {
                 rm = new ResourceManager("C969_Performance_Assessment.Strings_es-MX", typeof(LoginForm).Assembly);
             }

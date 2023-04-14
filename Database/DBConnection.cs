@@ -18,12 +18,11 @@ namespace C969_Performance_Assessment.Database
             
             try
             {
-                // Gets connection string and assigns to string variable
                 string constr = ConfigurationManager.ConnectionStrings["localdb"].ConnectionString;
-                // Creates new MySqlConnection obj conn by passing connection string
+
                 conn = new MySqlConnection(constr);
 
-                // Creates the connection
+
                 conn.Open();
 
             }

@@ -50,25 +50,21 @@ namespace C969_Performance_Assessment
             // Check if appointment overlaps with existing appointments
             else if (titleTextBox.Text.Length < 4)
             {
-                // Display an error message to the user
                 MessageBox.Show("Invalid Title. Title must have at least 5 characters.");
             }
             // Check the contact for only letters and spaces
             else if (!(new Regex("^[a-zA-Z\\s]+$")).IsMatch(contactTxtBox.Text))
             {
-                // Display an error message to the user
                 MessageBox.Show("Contact can only contain spaces and letters.");
             }
             // Check the URL for matching pattern including HTTPS/HTTP/WWW
             else if (!(new Regex(@"^(?:(?:https?|ftp)://)?(?:www\.)?[a-z0-9]+(?:\.[a-z]{2,}){1,3}(?:/?|\#[\w\-\%\=\?]+)?$")).IsMatch(urlTextBox.Text) && !string.IsNullOrWhiteSpace(urlTextBox.Text))
             {
-                // Display an error message to the user
                 MessageBox.Show("Invalid URL. Please enter a valid url e.g. www.example.com.");
             }
             // Check the location for invalid characters
             else if (!(new Regex("^^[a-zA-Z0-9 #&.,'-]*$")).IsMatch(locationTextBox.Text))
             {
-                // Display an error message to the user
                 MessageBox.Show("Invalid location. Please enter a valid location with only letters, numbers, and basic punctuation marks.");
             }
             else if (endDateTimePicker.Value < startDateTimePicker.Value)
@@ -110,8 +106,6 @@ namespace C969_Performance_Assessment
 
         private bool overlappingAppointment(DateTime start, DateTime end)
         {
-            // REMOVE
-            // MessageBox.Show("overLappingAppointment reached.");
 
             string overlapCheckQuery = "SELECT COUNT(*) FROM appointment WHERE(start BETWEEN DATE_FORMAT(@Start, '%Y-%m-%d %H:%i:%s') AND DATE_FORMAT(@End, '%Y-%m-%d %H:%i:%s')) AND createdBy = @CurrentUser; ";
             using (MySqlCommand cmd = new MySqlCommand(overlapCheckQuery, conn))
@@ -120,13 +114,7 @@ namespace C969_Performance_Assessment
                 cmd.Parameters.AddWithValue("@End", end.ToUniversalTime());
                 cmd.Parameters.AddWithValue("@CurrentUser", CurrentUser.instance.Name);
 
-                // REMOVE
-                // MessageBox.Show(start.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss") + " is the start time " + end.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss") + " is the end time.");
-
                 object result = cmd.ExecuteScalar();
-
-                // REMOVE
-                // MessageBox.Show("Here is the result: " + result.ToString());
 
                 if(result == null)
                 {
@@ -135,9 +123,6 @@ namespace C969_Performance_Assessment
                 else
                 {
                     int count = Convert.ToInt32(result);
-
-                    // REMOVE
-                    // MessageBox.Show(count.ToString());
 
                     return count > 0;
                 }

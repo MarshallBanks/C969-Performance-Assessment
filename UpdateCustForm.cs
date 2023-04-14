@@ -78,25 +78,21 @@ namespace C969_Performance_Assessment
             // Check the phone number for at least 10 digits
             else if (phoneNumberBox.Text.Where(char.IsDigit).Count() != 10)
             {
-                // Display an error message to the user
                 MessageBox.Show("Invalid phone number. Please enter a 10-digit phone number.");
             }
             // Check the full name for only letters and spaces
             else if (!(new Regex("^[a-zA-Z\\s]+$")).IsMatch(fullNameBox.Text))
             {
-                // Display an error message to the user
                 MessageBox.Show("Full Name can only contain spaces and letters.");
             }
             // Check the zip code for 5 digits
             else if (!(new Regex("^\\d{5}$")).IsMatch(postalCodeBox.Text))
             {
-                // Display an error message to the user
                 MessageBox.Show("Invalid postal code. Please enter a 5-digit postal code.");
             }
             // Check the address for invalid characters
             else if (!(new Regex("^^[a-zA-Z0-9 #&.,'-]*$")).IsMatch(addressBox.Text))
             {
-                // Display an error message to the user
                 MessageBox.Show("Invalid address. Please enter a valid address with only letters, numbers, and basic punctuation marks.");
             }
             else
@@ -154,7 +150,7 @@ namespace C969_Performance_Assessment
                 updateQuery += "c.active = @Active, ";
             }
 
-            // Add lastUpdateBy and WHERE clause to the query
+            // Add lastUpdateBy and WHERE clause to the end of the query
             updateQuery += "c.lastUpdate = UTC_TIMESTAMP(), c.lastUpdateBy = @LastUpdateBy WHERE c.customerId = @CustomerId;";
 
             using (MySqlCommand cmd = new MySqlCommand(updateQuery, conn))
@@ -178,7 +174,7 @@ namespace C969_Performance_Assessment
 
         private void phoneNumberBox_TextChanged(object sender, EventArgs e)
         {
-            // Remove any non-numeric characters from the input
+            // Remove any non digits
             string digitsOnly = new string(phoneNumberBox.Text.Where(char.IsDigit).ToArray());
 
             //Limit the input to 14 digits

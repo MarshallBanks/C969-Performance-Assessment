@@ -84,7 +84,6 @@ namespace C969_Performance_Assessment
             DateTime now = DateTime.Now;
             DateTime next15Minutes = now.AddMinutes(15);
 
-            // Query the database to check for upcoming appointments within 15 minutes
             string query = "SELECT COUNT(*) FROM appointment WHERE start BETWEEN @Now AND @Next15Minutes AND createdBy = @user";
             using (MySqlCommand cmd = new MySqlCommand(query, conn))
             {
@@ -96,12 +95,10 @@ namespace C969_Performance_Assessment
 
                 if (count == 1)
                 {
-                    // Display the alert
                     MessageBox.Show("You have an appointment coming up in 15 minutes!", "Appointment Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 if (count > 1)
                 {
-                    // Display the alert
                     MessageBox.Show($"You have {count} appointments coming up in 15 minutes!", "Appointment Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 

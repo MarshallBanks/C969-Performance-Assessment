@@ -142,25 +142,21 @@ namespace C969_Performance_Assessment
             }
             else if (titleTextBox.Text.Length < 4)
             {
-                // Display an error message to the user
                 MessageBox.Show("Invalid Title. Title must have at least 5 characters.");
             }
             // Check the contact for only letters and spaces
             else if (!(new Regex("^[a-zA-Z\\s]+$")).IsMatch(contactTxtBox.Text))
             {
-                // Display an error message to the user
                 MessageBox.Show("Contact can only contain spaces and letters.");
             }
             // Check the URL for matching pattern including HTTPS/HTTP/WWW
             else if (!(new Regex(@"^(?:(?:https?|ftp)://)?(?:www\.)?[a-z0-9]+(?:\.[a-z]{2,}){1,3}(?:/?|\#[\w\-\%\=\?]+)?$")).IsMatch(urlTextBox.Text) && !string.IsNullOrWhiteSpace(urlTextBox.Text))
             {
-                // Display an error message to the user
                 MessageBox.Show("Invalid URL. Please enter a valid url e.g. www.example.com.");
             }
             // Check the location for invalid characters
             else if (!(new Regex("^^[a-zA-Z0-9 #&.,'-]*$")).IsMatch(locationTextBox.Text))
             {
-                // Display an error message to the user
                 MessageBox.Show("Invalid location. Please enter a valid location with only letters, numbers, and basic punctuation marks.");
             }
             else if (endDateTimePicker.Value < startDateTimePicker.Value)
@@ -205,7 +201,6 @@ namespace C969_Performance_Assessment
 
         private bool overlappingAppointment(DateTime start, DateTime end, int appointmentId)
         {
-            //MessageBox.Show("overLappingAppointment reached.");
 
             string overlapCheckQuery = "SELECT COUNT(*) FROM appointment WHERE(createdBy = @CurrentUser) AND ((@Start BETWEEN start AND end) OR (@End BETWEEN start AND end) OR (start BETWEEN @Start AND @End) OR (end BETWEEN @Start AND @End)) AND appointmentId != @AppointmentId;";
 
@@ -216,11 +211,8 @@ namespace C969_Performance_Assessment
                 cmd.Parameters.AddWithValue("@AppointmentId", appointmentId);
                 cmd.Parameters.AddWithValue("@CurrentUser", CurrentUser.instance.Name);
 
-                //MessageBox.Show(start.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss") + " is the start time " + end.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss") + " is the end time.");
 
                 object result = cmd.ExecuteScalar();
-
-                //MessageBox.Show("Here is the result: " + result.ToString());
 
                 if (result == null)
                 {

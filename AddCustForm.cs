@@ -46,14 +46,12 @@ namespace C969_Performance_Assessment
             // Check the phone number for at least 10 digits
             else if (phoneNumberBox.Text.Where(char.IsDigit).Count() != 10)
             {
-                // Display an error message to the user
                 MessageBox.Show("Invalid phone number. Please enter a 10-digit phone number.");
             }
             // Check the full name for only letters and spaces
             // Using the LAMBDA expression is easier to read and in some cases faster if the regex expression is complicated
             else if (!fullNameBox.Text.All(c => char.IsLetter(c) || c == ' '))
             {
-                // Display an error message to the user
                 MessageBox.Show("Full Name can only contain spaces and letters.");
             }
             // Check the zip code for 5 digits
@@ -67,7 +65,6 @@ namespace C969_Performance_Assessment
             // so, better maintainability if someone else reads it and like stated above, it can be faster if the regex patter is complex. 
             else if (!addressBox.Text.All(c => char.IsLetterOrDigit(c) || c == ' ' || c == '#' || c == '&' || c == '.' || c == ',' || c == '-' || c == '\''))
             {
-                // Display an error message to the user
                 MessageBox.Show("Invalid address. Please enter a valid address with only letters, numbers, and basic punctuation marks.");
             }
             else
@@ -128,7 +125,7 @@ namespace C969_Performance_Assessment
 
         private void phoneNumberBox_TextChanged(object sender, EventArgs e)
         {
-            // Remove any non-numeric characters from the input
+            // Remove any non digit characters
             string digitsOnly = new string(phoneNumberBox.Text.Where(char.IsDigit).ToArray());
 
             //Limit the input to 14 digits
